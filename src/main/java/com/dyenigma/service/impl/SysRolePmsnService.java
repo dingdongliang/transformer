@@ -1,0 +1,149 @@
+package com.dyenigma.service.impl;
+
+import com.dyenigma.dao.SysPermissionMapper;
+import com.dyenigma.dao.SysRolePmsnMapper;
+import com.dyenigma.entity.BaseDomain;
+import com.dyenigma.entity.SysPermission;
+import com.dyenigma.entity.SysRolePmsn;
+import com.dyenigma.service.ISysRolePmsnService;
+import com.dyenigma.util.Constants;
+import com.dyenigma.util.StringUtil;
+import com.dyenigma.util.UUIDUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+
+/**
+ * Description:
+ * author  dyenigma
+ * date 2017/07/21
+ */
+@Service
+@Transactional
+public class SysRolePmsnService extends BaseService<SysRolePmsn> implements
+        ISysRolePmsnService {
+
+    @Autowired
+    private SysRolePmsnMapper sysRolePmsnMapper;
+    @Autowired
+    private SysPermissionMapper sysPermissionMapper;
+
+
+    @Override
+    public List<SysPermission> findAllByRoleId(String roleId) {
+        logger.info("开始读取id为" + roleId + "的角色权限信息");
+        List<SysPermission> permissions = new ArrayList<>();
+        List<SysRolePmsn> idList = sysRolePmsnMapper.findAllByRoleId(roleId);
+        for (SysRolePmsn rolePmsn : idList) {
+            SysPermission permission = sysPermissionMapper.selectByPrimaryKey(rolePmsn.getPmsnId());
+            permissions.add(permission);
+        }
+        return permissions;
+    }
+
+    /**
+     * 保存选取的权限与角色映射
+     * param roleId
+     * param checkedIds
+     * return
+     */
+    @Override
+    public boolean savePermission(String roleId, String checkedIds) {
+        String userId = Constants.getCurrendUser().getUserId();
+
+        //盛放没有修改以前的角色权限对应记录，用于在修改后删除多余的记录
+        Map<String, SysRolePmsn> map = new HashMap<>();
+
+        //获取某角色ID对应的所有权限
+        List<SysRolePmsn> rolePermissionList = sysRolePmsnMapper.findAllByRoleId(roleId);
+        //循环处理这些权限与角色的对应记录，逐一放入map中，然后设置该记录为过期，用于标记删除
+        for (SysRolePmsn rolePmsn : rolePermissionList) {
+            String permissionId = rolePmsn.getPmsnId();
+            //对于角色权限对应记录来说，权限ID是互斥的，所以当成key处理
+            map.put(permissionId.toString(), rolePmsn);
+            //设置所有记录过期
+            updRolePermission(userId, rolePmsn, Constants.PERSISTENCE_DELETE_STATUS);
+        }
+        //开始处理修改后提交的对应数据，checkedIds为权限集合
+        if (null != checkedIds && !"".equals(checkedIds)) {
+            String[] ids = checkedIds.split(",");
+            for (String id : ids) {
+                if (StringUtil.isEmpty(id)) {
+                    continue;
+                }
+                //然后看这些权限ID是否在map中
+                SysRolePmsn rolePmsn = map.get(id);
+                if (rolePmsn != null) {
+                    //如果在map中，说明在数据库中有记录，把状态改成正常
+                    updRolePermission(userId, rolePmsn, Constants.PERSISTENCE_STATUS);
+                } else {
+                    //如果不在msp中，说明该对应记录在数据库中没有，要新增
+                    rolePmsn = new SysRolePmsn();
+                    BaseDomain.createLog(rolePmsn, userId);
+                    rolePmsn.setStatus(Constants.PERSISTENCE_STATUS);
+                    rolePmsn.setPmsnId(id);
+                    rolePmsn.setRoleId(roleId);
+                    rolePmsn.setRpId(UUIDUtil.getUUID());
+                    mapper.insert(rolePmsn);
+                }
+                //同时删除已经处理过的map值
+                map.remove(id);
+            }
+        }
+        //当所有值都处理完毕以后，剩下的map值就是：原来有对应关系，修改后没有对应关系，删除之
+        for (Map.Entry<String, SysRolePmsn> entry : map.entrySet()) {
+            mapper.deleteByPrimaryKey(entry.getValue().getRpId());
+        }
+
+        return true;
+    }
+
+    private void updRolePermission(String userId, SysRolePmsn rolePermission, String status) {
+        BaseDomain.editLog(rolePermission, userId);
+        rolePermission.setStatus(status);
+        mapper.updateByPrimaryKeySelective(rolePermission);
+    }
+
+    @Override
+    public boolean setDefaultRole(String roleId) {
+        String userId = Constants.getCurrendUser().getUserId();
+
+        //获取所有的默认权限
+        List<SysPermission> pList = sysPermissionMapper.findAllDefault();
+        //获取默认权限的父节点
+        Set<SysPermission> pSet = new HashSet<>();
+        for (SysPermission permission : pList) {
+            pSet.add(permission);
+            getPrntPmsn(pSet, permission);
+        }
+        //把所有的权限节点映射到角色上
+        for (SysPermission pmsn : pSet) {
+            SysRolePmsn rolePmsn = new SysRolePmsn();
+            BaseDomain.createLog(rolePmsn, userId);
+            rolePmsn.setRpId(UUIDUtil.getUUID());
+            rolePmsn.setRoleId(roleId);
+            rolePmsn.setPmsnId(pmsn.getPmsnId());
+            rolePmsn.setStatus(Constants.PERSISTENCE_STATUS);
+            mapper.insert(rolePmsn);
+        }
+
+        return true;
+    }
+
+    private void getPrntPmsn(Set<SysPermission> pSet, SysPermission pmsn) {
+        String pId = pmsn.getPrntId();
+        if (!"0".equals(pId)) {
+            SysPermission prntPmsn = sysPermissionMapper.selectByPrimaryKey(pId);
+            pSet.add(prntPmsn);
+            getPrntPmsn(pSet, prntPmsn);
+        }
+    }
+}
