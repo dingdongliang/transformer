@@ -50,7 +50,7 @@
         <li><a href="#">关于</a></li>
     </ul>
 </div>
-<form action="login" method="GET">
+<form action="enter" method="POST">
     <div class="loginbody">
         <span class="systemlogo"></span>
 

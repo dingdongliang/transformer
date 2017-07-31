@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -40,6 +41,11 @@ public class LoginController extends BaseController {
     @Autowired
     private ISysUserService sysUserService;
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
+
     /**
      * param request
      * param return 参数
@@ -48,10 +54,10 @@ public class LoginController extends BaseController {
      * Title: login
      * Description: 用户登录
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(HttpServletRequest request) {
+    @RequestMapping(value = "/enter", method = RequestMethod.POST)
+    public String enter(HttpServletRequest request) {
+        String resultPageURL = InternalResourceViewResolver.REDIRECT_URL_PREFIX + "/";
 
-        String resultPageURL = "login";
         String account = request.getParameter("account");
         // MD5加密
         // 数据库中密码数据为98a6a31a7801d0418606e2d8cbc9d4a0，输入密码为system
@@ -92,7 +98,7 @@ public class LoginController extends BaseController {
             sysUserService.update(sysUser);
 
             request.getSession().setAttribute("currUser", account);
-            resultPageURL = "manage/main";
+            resultPageURL += "manage/main";
             logger.debug(resultPageURL);
         } catch (UnknownAccountException uae) {
             logger.debug("对用户[" + account + "]进行登录验证..验证未通过,未知账户");

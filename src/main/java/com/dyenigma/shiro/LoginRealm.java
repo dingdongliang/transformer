@@ -127,6 +127,7 @@ public class LoginRealm extends AuthorizingRealm {
     @PostConstruct
     public void initCredentialsMatcher() {// MD5加密
         HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(ALGORITHM);
+        matcher.setStoredCredentialsHexEncoded(true);
         setCredentialsMatcher(matcher);
     }
 

@@ -6,7 +6,7 @@
         });
 
         var request = $.ajax({
-            url: "getUsersMenu",
+            url: "/getUsersMenu",
             method: "POST",
             dataType: "JSON"
         });
