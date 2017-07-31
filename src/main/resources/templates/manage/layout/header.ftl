@@ -37,7 +37,7 @@
 <div class="topright">
     <ul>
         <li><a href="#">关于</a></li>
-        <li><a href="logout" target="_parent">退出</a></li>
+        <li><a href="/logout" target="_parent">退出</a></li>
     </ul>
     <div class="user">
         <span>欢迎${currUser}登录</span>

@@ -25,6 +25,8 @@ import com.dyenigma.util.Constants;
 import com.dyenigma.util.PageUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +35,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +48,8 @@ import java.util.stream.Collectors;
  * author  dyenigma
  * date 2017/07/21
  */
-@RestController
+@Controller
+@Api(description = "编辑用户API")
 @RequestMapping(value = "/manage/users")
 public class SysUserController extends BaseController {
 

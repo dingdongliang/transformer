@@ -1,5 +1,6 @@
 package com.dyenigma.controller;
 
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import java.util.Map;
  * date 2017/7/21 15:36
  */
 @Controller
+@Api(description = "客户前端页面展示API")
 @RequestMapping(value = "/frontJump")
 public class FrontJumpController extends BaseController {
 
@@ -69,7 +71,7 @@ public class FrontJumpController extends BaseController {
         return "main/database";
     }
 
-    @RequestMapping(value = "/question")
+    @GetMapping(value = "/question")
     public String question() {
         logger.debug("question() is executed!");
         return "main/question";

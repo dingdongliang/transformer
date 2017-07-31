@@ -6,7 +6,15 @@ import com.dyenigma.entity.GenFrontMenu;
 import com.dyenigma.service.IGenFrontMenuService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,7 +24,8 @@ import java.util.List;
 * author  dyenigma
 * date 2017/07/21
 */
-@RestController
+@Controller
+@ApiIgnore
 @RequestMapping("/gen/front/menu")
 public class GenFrontMenuController extends BaseController{
     @Resource

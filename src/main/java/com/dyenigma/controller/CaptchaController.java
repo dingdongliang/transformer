@@ -13,7 +13,8 @@ package com.dyenigma.controller;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
-import org.springframework.web.bind.annotation.RequestMapping;
+import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,11 +32,12 @@ import java.awt.image.BufferedImage;
  * date 2015年9月10日 上午8:37:31
  */
 @RestController
+@Api(description = "生成验证码API")
 public class CaptchaController extends BaseController{
     @Resource
     private Producer captchaProducer = null;
 
-    @RequestMapping("/captcha")
+    @GetMapping("/captcha")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 

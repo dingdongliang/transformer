@@ -12,6 +12,8 @@ import com.dyenigma.service.ISysPostService;
 import com.dyenigma.util.Constants;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -33,7 +34,8 @@ import java.util.List;
  * author  dyenigma
  * date 2017/07/21
  */
-@RestController
+@Controller
+@Api(description = "岗位管理API")
 @RequestMapping(value = "/manage/post")
 public class SysPostController extends BaseController {
 

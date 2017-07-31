@@ -5,6 +5,7 @@ import com.dyenigma.model.MenuModel;
 import com.dyenigma.service.ISysPermissionService;
 import com.dyenigma.service.ISysUserService;
 import com.google.code.kaptcha.Constants;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -19,6 +20,8 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +37,7 @@ import java.util.List;
  * date 2017/7/21 15:39
  */
 @Controller
+@Api(description = "登录API")
 public class LoginController extends BaseController {
 
     @Autowired
@@ -136,9 +140,9 @@ public class LoginController extends BaseController {
      * Title: logout
      * Description: 用户登出
      */
-    @RequestMapping("/logout")
+    @GetMapping("/logout")
     public String logout() {
-        String result = "manage/login";
+        String result = "login";
         SecurityUtils.getSubject().logout();
         return result;
     }
@@ -152,7 +156,7 @@ public class LoginController extends BaseController {
      * Description:查询用户所有权限菜单
      */
     @ResponseBody
-    @RequestMapping(value = "/getUsersMenu", produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/getUsersMenu", produces = "application/json;charset=utf-8")
     public List<MenuModel> getUsersMenu() {
         return sysPermissionService.createMenu();
     }
