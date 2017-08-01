@@ -97,3 +97,10 @@
 - freemarker模板使用需要总结
 - 重构原分页实现方式
 - 权限操作页面需要调整
+	- 修改include功能
+		-  删除<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+		-  删除<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+		-  修改<tags:include/>为<#include '../include.ftl'>
+	- 因控制器返回值格式改变，所以rsp.status需要改成rsp.code==200
+	- 图片路径修改
+	- 控制器路径修改

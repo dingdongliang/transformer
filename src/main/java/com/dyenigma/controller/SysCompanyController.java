@@ -183,18 +183,22 @@ public class SysCompanyController  {
         //获取绝对路径,如果realPath获取不到,尝试更换getRealPath方法的参数
         String realPath = request.getSession().getServletContext().getRealPath("/");
 
-        String allPath = realPath + "download" + File.separator + path;
+        String allPath = realPath + "download" ;
 
         FileOutputStream out = null;
         try {
-            out = new FileOutputStream(allPath);
+            File file= new File(allPath);
+            if(!file.exists()){
+                file.mkdirs();
+            }
+            out = new FileOutputStream(allPath+ File.separator + path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         //获取company资料写入文件
         List<SysCompany> list = new ArrayList<>();
-        list.add((SysCompany) sysCompanyService.findByIds(companyId));
+        list.add(sysCompanyService.findBy("coId",companyId));
         ExcelUtil<SysCompany> util = new ExcelUtil<>(SysCompany.class);
         util.exportExcel(list, "Sheet", 60000, out);
 

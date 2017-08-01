@@ -34,7 +34,7 @@
             success: function (result) {
                 $.messager.progress('close');
                 var obj = eval("(" + result + ")");
-                if (obj.status) {
+                if (obj.code == 200) {
                     $.modalDialog.openner.treegrid('reload');
                     $.modalDialog.handler.dialog('close');
                     $.messager.show({
@@ -111,7 +111,7 @@
 </style>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 10px;">
-        <input name="tempId" id="tempId" type="hidden" value="<%=request.getParameter("tempId") %>"/>
+        <input name="tempId" id="tempId" type="hidden" value=""/>
         <form id="form" method="post">
             <fieldset>
                 <legend><img src="/images/fromedit.png" style="margin-bottom: -3px;"/> 菜单编辑

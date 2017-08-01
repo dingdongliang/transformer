@@ -1,7 +1,11 @@
 package com.dyenigma.entity;
 
+import com.dyenigma.util.ExcelVOAttribute;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "sys_company")
 public class SysCompany extends BaseDomain {
@@ -12,10 +16,12 @@ public class SysCompany extends BaseDomain {
     @Column(name = "CO_ID")
     private String coId;
 
+
     /**
      * 公司名称
      */
     @Column(name = "CO_NAME")
+    @ExcelVOAttribute(name = "公司名称", column = "A", isExport = true, prompt = "这是公司名称!")
     private String coName;
 
     /**
@@ -28,6 +34,7 @@ public class SysCompany extends BaseDomain {
      * 父公司名称
      */
     @Column(name = "PRNT_NAME")
+    @ExcelVOAttribute(name = "父公司名称", column = "I")
     private String prntName;
 
     /**
@@ -46,24 +53,28 @@ public class SysCompany extends BaseDomain {
      * 公司电话
      */
     @Column(name = "CO_PHONE")
+    @ExcelVOAttribute(name = "公司电话", column = "B")
     private String coPhone;
 
     /**
      * 公司传真
      */
     @Column(name = "CO_FAX")
+    @ExcelVOAttribute(name = "公司传真", column = "C")
     private String coFax;
 
     /**
      * 公司地址
      */
     @Column(name = "CO_ADR")
+    @ExcelVOAttribute(name = "公司地址", column = "D")
     private String coAdr;
 
     /**
      * 邮政编码
      */
     @Column(name = "CO_ZIP")
+    @ExcelVOAttribute(name = "邮政编码", column = "E")
     private String coZip;
 
     /**
@@ -76,12 +87,14 @@ public class SysCompany extends BaseDomain {
      * 公司邮件地址
      */
     @Column(name = "CO_EMAIL")
+    @ExcelVOAttribute(name = "Email", column = "F")
     private String coEmail;
 
     /**
      * 公司联络人
      */
     @Column(name = "CONTACT")
+    @ExcelVOAttribute(name = "联系人", column = "G")
     private String contact;
 
     /**
@@ -112,6 +125,7 @@ public class SysCompany extends BaseDomain {
      * 备注
      */
     @Column(name = "CO_DESC")
+    @ExcelVOAttribute(name = "描述", column = "H")
     private String coDesc;
 
     /**

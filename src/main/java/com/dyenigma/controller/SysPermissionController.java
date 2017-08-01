@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +36,7 @@ import java.util.List;
 @Controller
 @Api(description = "权限管理API")
 @RequestMapping(value = "/manage/menu")
-public class SysPermissionController  {
+public class SysPermissionController {
 
     private final Logger logger = LoggerFactory.getLogger(SysPermissionController.class);
 
@@ -128,14 +127,9 @@ public class SysPermissionController  {
      * Description: 跳转到编辑菜单页面
      */
     @RequestMapping(value = "/menuEditDlg", method = RequestMethod.GET)
-    public ModelAndView functionEditDlg() {
-
+    public String functionEditDlg() {
         logger.debug("functionEditDlg() is executed!");
-
-        ModelAndView model = new ModelAndView();
-        model.setViewName("/manage/permission/pmsnEdit");
-
-        return model;
+        return "manage/permission/pmsnEdit";
     }
 
     /**
