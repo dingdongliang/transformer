@@ -1,5 +1,7 @@
 package com.dyenigma.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @ApiIgnore
 @RequestMapping(value = "/manage")
-public class MgrJumpController extends BaseController {
+public class MgrJumpController  {
+
+    private final Logger logger = LoggerFactory.getLogger(MgrJumpController.class);
 
     @RequestMapping(value = "/mTop", method = RequestMethod.GET)
     public String mTop(HttpServletRequest request, Model model) {

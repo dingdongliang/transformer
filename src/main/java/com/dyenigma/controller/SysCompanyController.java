@@ -1,11 +1,9 @@
 package com.dyenigma.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.dyenigma.core.Result;
 import com.dyenigma.core.ResultGenerator;
 import com.dyenigma.entity.SysCompany;
 import com.dyenigma.model.GridModel;
-import com.dyenigma.model.Json;
 import com.dyenigma.model.TreeModel;
 import com.dyenigma.service.ISysCompanyService;
 import com.dyenigma.util.Constants;
@@ -16,6 +14,8 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import org.apache.commons.io.FileUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -51,7 +51,9 @@ import java.util.List;
 @Controller
 @Api(description = "公司管理API")
 @RequestMapping(value = "/manage/comp")
-public class SysCompanyController extends BaseController {
+public class SysCompanyController  {
+
+    private final Logger logger = LoggerFactory.getLogger(SysCompanyController.class);
 
     @Resource
     private ISysCompanyService sysCompanyService;
@@ -138,10 +140,13 @@ public class SysCompanyController extends BaseController {
     @RequiresPermissions({"coAdd", "coEdit"})
     @ResponseBody
     @RequestMapping(value = "/saveOrUpdateComp", produces = "application/json;charset=utf-8")
-    public String saveOrUpdateComp(SysCompany company) {
+    public Result saveOrUpdateComp(SysCompany company) {
         //可以限制只能添加多少公司
-        Json json = getMessage(sysCompanyService.persistenceComp(company));
-        return JSONArray.toJSONString(json);
+        if (sysCompanyService.persistenceComp(company)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
+        }
     }
 
 
@@ -153,17 +158,14 @@ public class SysCompanyController extends BaseController {
     @RequiresPermissions({"coDel"})
     @ResponseBody
     @RequestMapping(value = "/delComp", produces = "application/json;charset=utf-8")
-    public String delComp(HttpServletRequest request) {
+    public Result delComp(HttpServletRequest request) {
         String id = request.getParameter("coId");
 
-        Json json = new Json();
         if (sysCompanyService.delComp(id)) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL + Constants.IS_EXT_SUBMENU);
+            return ResultGenerator.genFailResult(Constants.IS_EXT_SUBMENU);
         }
-        return JSONArray.toJSONString(json);
     }
 
     /**

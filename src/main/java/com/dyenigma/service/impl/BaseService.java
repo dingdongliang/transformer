@@ -5,8 +5,6 @@ import com.dyenigma.core.Mapper;
 import com.dyenigma.core.ServiceException;
 import com.dyenigma.service.IBaseService;
 import org.apache.ibatis.exceptions.TooManyResultsException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;
 
@@ -22,8 +20,6 @@ import java.util.Map;
  * date 2017/6/23 15:32
  */
 public abstract class BaseService<T> implements IBaseService<T> {
-
-    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     protected Mapper<T> mapper;

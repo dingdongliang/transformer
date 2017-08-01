@@ -6,6 +6,8 @@ import com.dyenigma.entity.GenFrontMenu;
 import com.dyenigma.service.IGenFrontMenuService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,9 @@ import java.util.List;
 @Controller
 @ApiIgnore
 @RequestMapping("/gen/front/menu")
-public class GenFrontMenuController extends BaseController{
+public class GenFrontMenuController {
+
+    private final Logger logger = LoggerFactory.getLogger(GenFrontMenuController.class);
     @Resource
     private IGenFrontMenuService genFrontMenuService;
 

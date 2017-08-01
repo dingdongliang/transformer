@@ -7,6 +7,8 @@ import com.dyenigma.service.ISysUserRoleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,10 @@ import java.util.List;
 @Controller
 @Api(description = "用户角色分配API")
 @RequestMapping(value = "/manage/userRole")
-public class SysUserRoleController extends BaseController {
+public class SysUserRoleController  {
+
+    private final Logger logger = LoggerFactory.getLogger(SysUserRoleController.class);
+
     @Resource
     private ISysUserRoleService sysUserRoleService;
 

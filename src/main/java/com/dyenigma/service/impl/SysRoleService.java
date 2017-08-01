@@ -18,6 +18,8 @@ import com.dyenigma.util.Constants;
 import com.dyenigma.util.PageUtil;
 import com.dyenigma.util.StringUtil;
 import com.dyenigma.util.UUIDUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +37,9 @@ import java.util.Map;
 @Transactional
 public class SysRoleService extends BaseService<SysRole> implements
         ISysRoleService {
+
+    private final Logger logger = LoggerFactory.getLogger(SysRoleService.class);
+
     @Autowired
     private SysRoleMapper sysRoleMapper;
     @Autowired

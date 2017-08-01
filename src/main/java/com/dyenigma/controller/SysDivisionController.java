@@ -1,16 +1,16 @@
 package com.dyenigma.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.dyenigma.core.Result;
 import com.dyenigma.core.ResultGenerator;
 import com.dyenigma.entity.SysDivision;
-import com.dyenigma.model.Json;
 import com.dyenigma.model.TreeModel;
 import com.dyenigma.service.ISysDivisionService;
 import com.dyenigma.util.Constants;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +35,9 @@ import java.util.List;
 @Controller
 @Api(description = "组织管理API")
 @RequestMapping(value = "/manage/organ")
-public class SysDivisionController extends BaseController {
+public class SysDivisionController  {
+
+    private final Logger logger = LoggerFactory.getLogger(SysDivisionController.class);
 
     @Autowired
     private ISysDivisionService sysDivisionService;
@@ -84,20 +86,15 @@ public class SysDivisionController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/delOrgan", produces = "application/json;charset=utf-8")
-    public String delOrgan(HttpServletRequest request) {
+    public Result delOrgan(HttpServletRequest request) {
         String id = request.getParameter("id");
 
-        Json json = new Json();
-        boolean flag = sysDivisionService.deleteById(id);
-
-        if (flag) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+        if (sysDivisionService.deleteById(id)) {
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL + Constants.IS_EXT_SUBMENU);
+            return ResultGenerator.genFailResult(Constants.IS_EXT_SUBMENU);
         }
 
-        return JSONArray.toJSONString(json);
     }
 
     /**
@@ -125,9 +122,12 @@ public class SysDivisionController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/saveOrUpdateOrgan", produces = "application/json;charset=utf-8")
-    public String saveOrUpdateOrgan(SysDivision division) {
-        Json json = getMessage(sysDivisionService.persistenceOrgan(division));
-        return JSONArray.toJSONString(json);
+    public Result saveOrUpdateOrgan(SysDivision division) {
+        if (sysDivisionService.persistenceOrgan(division)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
+        }
     }
 
     @PostMapping

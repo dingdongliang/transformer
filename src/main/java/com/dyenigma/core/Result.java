@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSON;
  */
 public class Result {
     private int code;
+    private String title;
     private String message;
     private Object data;
 
@@ -42,6 +43,15 @@ public class Result {
 
     public Result setData(Object data) {
         this.data = data;
+        return this;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Result setTitle(String title) {
+        this.title = title;
         return this;
     }
 

@@ -7,6 +7,8 @@ import com.dyenigma.service.ISysRolePmsnService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,9 @@ import java.util.List;
 @Controller
 @Api(description = "角色权限分配API")
 @RequestMapping("/sys/role/pmsn")
-public class SysRolePmsnController extends BaseController{
+public class SysRolePmsnController {
+
+    private final Logger logger = LoggerFactory.getLogger(SysRolePmsnController.class);
     @Resource
     private ISysRolePmsnService sysRolePmsnService;
 

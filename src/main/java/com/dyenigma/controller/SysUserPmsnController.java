@@ -7,6 +7,8 @@ import com.dyenigma.service.ISysUserPmsnService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,9 @@ import java.util.List;
 @Controller
 @Api(description = "用户权限分配API")
 @RequestMapping("/sys/user/pmsn")
-public class SysUserPmsnController extends BaseController{
+public class SysUserPmsnController {
+    private final Logger logger = LoggerFactory.getLogger(SysUserPmsnController.class);
+
     @Resource
     private ISysUserPmsnService sysUserPmsnService;
 

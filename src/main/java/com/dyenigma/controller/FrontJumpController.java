@@ -1,6 +1,8 @@
 package com.dyenigma.controller;
 
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,9 @@ import java.util.Map;
 @Controller
 @Api(description = "客户前端页面展示API")
 @RequestMapping(value = "/frontJump")
-public class FrontJumpController extends BaseController {
+public class FrontJumpController  {
+
+    private final Logger logger = LoggerFactory.getLogger(FrontJumpController.class);
 
     @GetMapping(value = "/show")
     public String show(Model model) {

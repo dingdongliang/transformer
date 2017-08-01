@@ -1,12 +1,10 @@
 package com.dyenigma.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.dyenigma.core.Result;
 import com.dyenigma.core.ResultGenerator;
 import com.dyenigma.entity.SysPrjRole;
 import com.dyenigma.entity.SysProject;
 import com.dyenigma.entity.SysUser;
-import com.dyenigma.model.Json;
 import com.dyenigma.service.ISysPrjRoleService;
 import com.dyenigma.service.ISysPrjUserService;
 import com.dyenigma.service.ISysProjectService;
@@ -14,6 +12,8 @@ import com.dyenigma.util.Constants;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +38,9 @@ import java.util.List;
 @Controller
 @Api(description = "编辑项目组API")
 @RequestMapping(value = "/manage/project")
-public class SysProjectController extends BaseController {
+public class SysProjectController  {
 
+    private final Logger logger = LoggerFactory.getLogger(SysProjectController.class);
 
     @Resource
     private ISysProjectService sysProjectService;
@@ -85,9 +86,13 @@ public class SysProjectController extends BaseController {
      * return:java.lang.String
      */
     @RequestMapping(value = "/saveOrUpdatePrj", produces = "application/json;charset=utf-8")
-    public String saveOrUpdatePrj(SysProject prj) {
-        Json json = getMessage(sysProjectService.persistencePrj(prj));
-        return JSONArray.toJSONString(json);
+    public Result saveOrUpdatePrj(SysProject prj) {
+
+        if (sysProjectService.persistencePrj(prj)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
+        }
     }
 
     /**
@@ -99,20 +104,14 @@ public class SysProjectController extends BaseController {
      * return:java.lang.String
      */
     @RequestMapping(value = "/delPrj", produces = "application/json;charset=utf-8")
-    public String delPrj(HttpServletRequest request) {
+    public Result delPrj(HttpServletRequest request) {
         String prjId = request.getParameter("prjId");
 
-        Json json = new Json();
-        boolean flag = sysProjectService.delPrj(prjId);
-
-        if (flag) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+        if (sysProjectService.delPrj(prjId)) {
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL + Constants.IS_EXT_SUBMENU);
+            return ResultGenerator.genFailResult(Constants.IS_EXT_SUBMENU);
         }
-
-        return JSONArray.toJSONString(json);
     }
 
     /**
@@ -139,19 +138,15 @@ public class SysProjectController extends BaseController {
      * return:java.lang.String
      */
     @RequestMapping(value = "/savePrjRoles", produces = "application/json;charset=utf-8")
-    public String savePrjRoles(HttpServletRequest request) {
+    public Result savePrjRoles(HttpServletRequest request) {
         String prjId = request.getParameter("prjId");
         String checkedIds = request.getParameter("isCheckedIds");
-        Json json = new Json();
 
         if (sysProjectService.savePrjRole(prjId, checkedIds)) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL);
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
         }
-
-        return JSONArray.toJSONString(json);
     }
 
     /**
@@ -163,19 +158,16 @@ public class SysProjectController extends BaseController {
      * return:java.lang.String
      */
     @RequestMapping(value = "/savePrjUsers", produces = "application/json;charset=utf-8")
-    public String savePrjUsers(HttpServletRequest request) {
+    public Result savePrjUsers(HttpServletRequest request) {
         String prjId = request.getParameter("prjId");
         String checkedIds = request.getParameter("isCheckedIds");
-        Json json = new Json();
 
         if (sysProjectService.savePrjUsers(prjId, checkedIds)) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL);
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
         }
 
-        return JSONArray.toJSONString(json);
     }
 
     @RequestMapping(value = "/searchPrjUser", produces = "application/json;charset=utf-8")

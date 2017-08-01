@@ -9,6 +9,8 @@ import com.dyenigma.util.PageUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +33,8 @@ import java.util.List;
 @Controller
 @Api(description = "问题操作API")
 @RequestMapping(value = "/manage/qstn")
-public class GenQuestionController extends BaseController {
-
+public class GenQuestionController  {
+    private final Logger logger = LoggerFactory.getLogger(GenQuestionController.class);
 
     @Resource
     private IGenQuestionService genQuestionService;

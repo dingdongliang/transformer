@@ -1,11 +1,9 @@
 package com.dyenigma.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.dyenigma.core.Result;
 import com.dyenigma.core.ResultGenerator;
 import com.dyenigma.entity.SysPost;
 import com.dyenigma.entity.SysPostRole;
-import com.dyenigma.model.Json;
 import com.dyenigma.model.TreeModel;
 import com.dyenigma.service.ISysPostRoleService;
 import com.dyenigma.service.ISysPostService;
@@ -13,6 +11,8 @@ import com.dyenigma.util.Constants;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +37,9 @@ import java.util.List;
 @Controller
 @Api(description = "岗位管理API")
 @RequestMapping(value = "/manage/post")
-public class SysPostController extends BaseController {
+public class SysPostController  {
 
+    private final Logger logger = LoggerFactory.getLogger(SysPostController.class);
 
     @Resource
     private ISysPostService sysPostService;
@@ -134,19 +135,15 @@ public class SysPostController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/savePostRole", produces = "application/json;charset=utf-8")
-    public String savePostRole(HttpServletRequest request) {
+    public Result savePostRole(HttpServletRequest request) {
         String postId = request.getParameter("postId");
         String checkedIds = request.getParameter("allCheck");
-        Json json = new Json();
 
         if (sysPostRoleService.savePostRole(postId, checkedIds)) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL);
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
         }
-
-        return JSONArray.toJSONString(json);
     }
 
 
@@ -160,20 +157,15 @@ public class SysPostController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/delPost", produces = "application/json;charset=utf-8")
-    public String delPost(HttpServletRequest request) {
+    public Result delPost(HttpServletRequest request) {
         String postId = request.getParameter("id");
 
-        Json json = new Json();
-        boolean flag = sysPostService.invalidByPrimaryKey(postId) > 0;
-
-        if (flag) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+        if (sysPostService.invalidByPrimaryKey(postId) > 0) {
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL + Constants.IS_EXT_SUBMENU);
+            return ResultGenerator.genFailResult(Constants.IS_EXT_SUBMENU);
         }
 
-        return JSONArray.toJSONString(json);
     }
 
     /**
@@ -186,9 +178,12 @@ public class SysPostController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/saveOrUpdatePost", produces = "application/json;charset=utf-8")
-    public String saveOrUpdatePost(SysPost post) {
-        Json json = getMessage(sysPostService.persistencePost(post));
-        return JSONArray.toJSONString(json);
+    public Result saveOrUpdatePost(SysPost post) {
+        if (sysPostService.persistencePost(post)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
+        }
     }
 
     @ResponseBody

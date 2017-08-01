@@ -1,6 +1,5 @@
 package com.dyenigma.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.dyenigma.core.Result;
 import com.dyenigma.core.ResultGenerator;
 import com.dyenigma.entity.SysCompany;
@@ -12,7 +11,6 @@ import com.dyenigma.entity.SysUserPmsn;
 import com.dyenigma.entity.SysUserPost;
 import com.dyenigma.entity.SysUserRole;
 import com.dyenigma.model.GridModel;
-import com.dyenigma.model.Json;
 import com.dyenigma.model.TreeModel;
 import com.dyenigma.service.ISysCompanyService;
 import com.dyenigma.service.ISysDivisionService;
@@ -26,6 +24,8 @@ import com.dyenigma.util.PageUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,9 +51,9 @@ import java.util.stream.Collectors;
 @Controller
 @Api(description = "编辑用户API")
 @RequestMapping(value = "/manage/users")
-public class SysUserController extends BaseController {
+public class SysUserController {
 
-
+    private final Logger logger = LoggerFactory.getLogger(SysUserController.class);
     @Resource
     private ISysUserService sysUserService;
     @Resource
@@ -245,28 +245,26 @@ public class SysUserController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/saveOrUpdateUser", produces = "application/json;charset=utf-8")
-    public String saveOrUpdateUser(SysUser user) {
-        Json json = getMessage(sysUserService.persistenceUser(user));
-        return JSONArray.toJSONString(json);
+    public Result saveOrUpdateUser(SysUser user) {
+        if (sysUserService.persistenceUser(user)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
+        }
     }
 
 
     @ResponseBody
     @RequestMapping(value = "/delUser", produces = "application/json;charset=utf-8")
-    public String delUser(HttpServletRequest request) {
+    public Result delUser(HttpServletRequest request) {
         String id = request.getParameter("userId");
 
-        Json json = new Json();
-        boolean flag = sysUserService.delUser(id);
-
-        if (flag) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+        if (sysUserService.delUser(id)) {
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL + Constants.IS_EXT_SUBMENU);
+            return ResultGenerator.genFailResult(Constants.IS_EXT_SUBMENU);
         }
 
-        return JSONArray.toJSONString(json);
     }
 
     @ResponseBody
@@ -284,21 +282,17 @@ public class SysUserController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/saveUserRoles", produces = "application/json;charset=utf-8")
-    public String saveUserRoles(HttpServletRequest request) {
+    public Result saveUserRoles(HttpServletRequest request) {
         String userId = request.getParameter("userId");
         String checkedIds = request.getParameter("isCheckedIds");
-        Json json = new Json();
 
         if (sysUserRoleService.saveRole(userId, checkedIds)) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL);
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
         }
 
-        return JSONArray.toJSONString(json);
     }
-
 
     /**
      * 保存某个用户的岗位分配
@@ -307,19 +301,16 @@ public class SysUserController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/saveUserPost", produces = "application/json;charset=utf-8")
-    public String saveUserPost(HttpServletRequest request) {
+    public Result saveUserPost(HttpServletRequest request) {
         String userId = request.getParameter("userId");
         String checkedIds = request.getParameter("isCheckedIds");
-        Json json = new Json();
 
         if (sysUserPostService.saveUserPost(userId, checkedIds)) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL);
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
         }
 
-        return JSONArray.toJSONString(json);
     }
 
 
@@ -330,19 +321,15 @@ public class SysUserController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/saveUserPmsn", produces = "application/json;charset=utf-8")
-    public String saveUserPmsn(HttpServletRequest request) {
+    public Result saveUserPmsn(HttpServletRequest request) {
         String userId = request.getParameter("userId");
         String checkedIds = request.getParameter("isCheckedIds");
-        Json json = new Json();
 
         if (sysUserPmsnService.saveUserPmsn(userId, checkedIds)) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL);
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
         }
-
-        return JSONArray.toJSONString(json);
     }
 
     @ResponseBody

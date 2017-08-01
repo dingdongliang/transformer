@@ -22,6 +22,8 @@ import com.dyenigma.util.PageUtil;
 import com.dyenigma.util.StringUtil;
 import com.dyenigma.util.UUIDUtil;
 import com.dyenigma.util.security.Md5Utils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +41,9 @@ import java.util.Set;
 @Transactional
 public class SysUserService extends BaseService<SysUser> implements
         ISysUserService {
+
+    private final Logger logger = LoggerFactory.getLogger(SysUserService.class);
+
     @Autowired
     private SysUserMapper userMapper;
     @Autowired

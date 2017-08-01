@@ -1,12 +1,10 @@
 package com.dyenigma.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.dyenigma.core.Result;
 import com.dyenigma.core.ResultGenerator;
 import com.dyenigma.entity.SysPermission;
 import com.dyenigma.entity.SysRole;
 import com.dyenigma.model.GridModel;
-import com.dyenigma.model.Json;
 import com.dyenigma.service.ISysRolePmsnService;
 import com.dyenigma.service.ISysRoleService;
 import com.dyenigma.util.Constants;
@@ -14,6 +12,8 @@ import com.dyenigma.util.PageUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +36,9 @@ import java.util.List;
 @Controller
 @Api(description = "编辑权限API")
 @RequestMapping(value = "/manage/role")
-public class SysRoleController extends BaseController {
+public class SysRoleController  {
 
-
+    private final Logger logger = LoggerFactory.getLogger(SysRoleController.class);
     @Resource
     private ISysRoleService sysRoleService;
     @Resource
@@ -102,9 +102,12 @@ public class SysRoleController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/saveOrUpdateRole", produces = "application/json;charset=utf-8")
-    public String saveOrUpdateRole(SysRole role) {
-        Json json = getMessage(sysRoleService.persistenceRole(role));
-        return JSONArray.toJSONString(json);
+    public Result saveOrUpdateRole(SysRole role) {
+        if (sysRoleService.persistenceRole(role)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
+        }
     }
 
     /**
@@ -114,20 +117,15 @@ public class SysRoleController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/delRole", produces = "application/json;charset=utf-8")
-    public String delRole(HttpServletRequest request) {
+    public Result delRole(HttpServletRequest request) {
         String roleId = request.getParameter("roleId");
 
-        Json json = new Json();
-        boolean flag = sysRoleService.delRole(roleId);
-
-        if (flag) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+        if (sysRoleService.delRole(roleId)) {
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL + Constants.IS_EXT_SUBMENU);
+            return ResultGenerator.genFailResult(Constants.IS_EXT_SUBMENU);
         }
 
-        return JSONArray.toJSONString(json);
     }
 
     /**
@@ -151,35 +149,28 @@ public class SysRoleController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/savePermission", produces = "application/json;charset=utf-8")
-    public String savePermission(HttpServletRequest request) {
+    public Result savePermission(HttpServletRequest request) {
         String roleId = request.getParameter("roleId");
         String checkedIds = request.getParameter("allCheck");
-        Json json = new Json();
 
         if (sysRolePmsnService.savePermission(roleId, checkedIds)) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL);
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
         }
 
-        return JSONArray.toJSONString(json);
     }
 
     @ResponseBody
     @RequestMapping(value = "/setDefaultRole", produces = "application/json;charset=utf-8")
-    public String setDefaultRole(HttpServletRequest request) {
+    public Result setDefaultRole(HttpServletRequest request) {
         String roleId = request.getParameter("roleId");
-        Json json = new Json();
 
         if (sysRolePmsnService.setDefaultRole(roleId)) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL);
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
         }
-
-        return JSONArray.toJSONString(json);
     }
 
     @PostMapping

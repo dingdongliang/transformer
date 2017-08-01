@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>菜单管理</title>
-    <#include '../include.ftl'>
+<#include '../include.ftl'>
     <script type="text/javascript">
         var $dg;
         var $grid;
@@ -219,7 +219,8 @@
                                     });
 
                                     request.done(function (rsp) {
-                                        if (rsp.status) {
+                                        alert(JSON.stringify(rsp));
+                                        if (rsp.code == 200) {
                                             $dg.treegrid('remove', node.pmsnId);
                                         }
                                         $.messager.show({
@@ -256,10 +257,6 @@
                     width: 600,
                     height: 400,
                     href: "/manage/menu/menuEditDlg",
-                    onLoad: function () {
-                        var f = $.modalDialog.handler.find("#form");
-                        f.form("load", row);
-                    },
                     buttons: [{
                         text: '编辑',
                         iconCls: 'icon-yes',

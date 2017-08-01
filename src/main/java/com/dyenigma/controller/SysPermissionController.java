@@ -1,10 +1,8 @@
 package com.dyenigma.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.dyenigma.core.Result;
 import com.dyenigma.core.ResultGenerator;
 import com.dyenigma.entity.SysPermission;
-import com.dyenigma.model.Json;
 import com.dyenigma.model.MultiMenu;
 import com.dyenigma.model.TreeModel;
 import com.dyenigma.service.ISysPermissionService;
@@ -13,6 +11,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +37,9 @@ import java.util.List;
 @Controller
 @Api(description = "权限管理API")
 @RequestMapping(value = "/manage/menu")
-public class SysPermissionController extends BaseController {
+public class SysPermissionController  {
+
+    private final Logger logger = LoggerFactory.getLogger(SysPermissionController.class);
 
     @Resource
     private ISysPermissionService sysPermissionService;
@@ -49,7 +51,7 @@ public class SysPermissionController extends BaseController {
      * Title: main
      * Description: 打开操作菜单页面
      */
-    @RequestMapping("/menuMain")
+    @GetMapping("/menuMain")
     public String main() {
 
         logger.debug("main() is executed!");
@@ -91,7 +93,7 @@ public class SysPermissionController extends BaseController {
      * Description:显示所有可添加子项的菜单项
      */
     @ResponseBody
-    @RequestMapping(value = "/findSuperMenu", produces = "application/json;charset=utf-8")
+    @GetMapping(value = "/findSuperMenu", produces = "application/json;charset=utf-8")
     public List<TreeModel> findSuperFunc() {
         return sysPermissionService.findSuperFunc();
     }
@@ -106,18 +108,15 @@ public class SysPermissionController extends BaseController {
      * Description: 删除菜单处理
      */
     @ResponseBody
-    @RequestMapping(value = "/delMenu", produces = "application/json;charset=utf-8")
-    public String delFunction(HttpServletRequest request) {
+    @PostMapping(value = "/delMenu", produces = "application/json;charset=utf-8")
+    public Result delFunction(HttpServletRequest request) {
         String id = request.getParameter("id");
 
-        Json json = new Json();
         if (sysPermissionService.deleteById(id)) {
-            json.setStatus(true);
-            json.setMessage(Constants.POST_DATA_SUCCESS);
+            return ResultGenerator.genSuccessResult();
         } else {
-            json.setMessage(Constants.POST_DATA_FAIL + Constants.IS_EXT_SUBMENU);
+            return ResultGenerator.genFailResult(Constants.IS_EXT_SUBMENU);
         }
-        return JSONArray.toJSONString(json);
     }
 
     /**
@@ -150,9 +149,13 @@ public class SysPermissionController extends BaseController {
     @RequiresPermissions({"menuAdd", "menuEdit"})
     @ResponseBody
     @RequestMapping(value = "/saveOrUpdateMenu", produces = "application/json;charset=utf-8")
-    public String saveOrUpdateFunc(SysPermission permission) {
-        Json json = getMessage(sysPermissionService.persistenceFunction(permission));
-        return JSONArray.toJSONString(json);
+    public Result saveOrUpdateFunc(SysPermission permission) {
+
+        if (sysPermissionService.persistenceFunction(permission)) {
+            return ResultGenerator.genSuccessResult();
+        } else {
+            return ResultGenerator.genFailResult(Constants.POST_DATA_FAIL);
+        }
     }
 
     @PostMapping

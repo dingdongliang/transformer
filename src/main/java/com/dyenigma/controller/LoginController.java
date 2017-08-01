@@ -18,6 +18,8 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +40,9 @@ import java.util.List;
  */
 @Controller
 @Api(description = "登录API")
-public class LoginController extends BaseController {
+public class LoginController  {
+
+    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private ISysPermissionService sysPermissionService;

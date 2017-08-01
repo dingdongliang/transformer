@@ -7,6 +7,8 @@ import com.dyenigma.service.ISysPrjRoleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,10 @@ import java.util.List;
 @Controller
 @Api(description = "项目组-权限分配API")
 @RequestMapping("/sys/prj/role")
-public class SysPrjRoleController extends BaseController{
+public class SysPrjRoleController {
+
+    private final Logger logger = LoggerFactory.getLogger(SysPrjRoleController.class);
+
     @Resource
     private ISysPrjRoleService sysPrjRoleService;
 

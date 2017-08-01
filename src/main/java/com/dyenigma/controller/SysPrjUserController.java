@@ -7,6 +7,8 @@ import com.dyenigma.service.ISysPrjUserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,9 @@ import java.util.List;
 @Controller
 @Api(description = "项目组成员管理API")
 @RequestMapping("/sys/prj/user")
-public class SysPrjUserController extends BaseController{
+public class SysPrjUserController {
+
+    private final Logger logger = LoggerFactory.getLogger(SysPrjUserController.class);
     @Resource
     private ISysPrjUserService sysPrjUserService;
 

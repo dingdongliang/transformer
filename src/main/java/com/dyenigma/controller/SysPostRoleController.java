@@ -7,6 +7,8 @@ import com.dyenigma.service.ISysPostRoleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,10 @@ import java.util.List;
 @Controller
 @Api(description = "岗位-权限分配API")
 @RequestMapping("/sys/post/role")
-public class SysPostRoleController extends BaseController {
+public class SysPostRoleController  {
+
+    private final Logger logger = LoggerFactory.getLogger(SysPostRoleController.class);
+
     @Resource
     private ISysPostRoleService sysPostRoleService;
 
