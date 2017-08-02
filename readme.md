@@ -104,4 +104,4 @@
 	- 因控制器返回值格式改变，所以rsp.status需要改成rsp.code==200
 	- 图片路径修改
 	- 控制器路径修改
-- 注意service实现类中的通用mapper陷阱，有时候要指定特定的mapper
+- 注意service实现类中的通用mapper陷阱，最好明确指定特定mapper
