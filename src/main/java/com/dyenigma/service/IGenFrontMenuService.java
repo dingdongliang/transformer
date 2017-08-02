@@ -5,10 +5,10 @@ import com.dyenigma.service.IBaseService;
 
 
 /**
-* Description:
-* author  dyenigma
-* date 2017/07/21
-*/
+ * Description:
+ * author  dyenigma
+ * date 2017/07/21
+ */
 public interface IGenFrontMenuService extends IBaseService<GenFrontMenu> {
 
 }

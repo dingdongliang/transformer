@@ -55,6 +55,7 @@ public interface IBaseService<T> {
     List<T> findByCondition(Condition condition);
 
     List<T> findAll();
+
     /**
      * Description: 获取某个查询的结果条数
      * Name:getCount
@@ -64,7 +65,6 @@ public interface IBaseService<T> {
      * return:Integer
      */
     Integer getCount(Map<String, Object> paramMap);
-
 
 
 }

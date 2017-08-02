@@ -1,5 +1,3 @@
-
-
 <style>
     .right .s_about p {
         padding-top: 5px;

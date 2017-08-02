@@ -40,7 +40,7 @@ import java.util.List;
  */
 @Controller
 @Api(description = "登录API")
-public class LoginController  {
+public class LoginController {
 
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 

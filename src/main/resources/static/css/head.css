@@ -1,113 +1,115 @@
 @CHARSET "UTF-8";
 
 .header {
-	margin: 0;
+    margin: 0;
 }
 
 .navbar {
-	min-height: 40px;
+    min-height: 40px;
 }
 
 .navbar:after, .navbar:before {
-	display: table;
-	line-height: 0;
-	content: "";
+    display: table;
+    line-height: 0;
+    content: "";
 }
 
 .navbar:after {
-	clear: both;
+    clear: both;
 }
 
 .header .navbar {
-	z-index: 999;
-	background-image: none;
-	filter: none;
-	background-color: #34302d;
-	border: 0;
-	border-top: 4px solid #6db33f;
-	box-shadow: none;
-	position: relative;
-	border-radius: 0;
-	padding: 0
+    z-index: 999;
+    background-image: none;
+    filter: none;
+    background-color: #34302d;
+    border: 0;
+    border-top: 4px solid #6db33f;
+    box-shadow: none;
+    position: relative;
+    border-radius: 0;
+    padding: 0
 }
 
 .header .navbar .logo {
-	display: inline-block
+    display: inline-block
 }
+
 /*logo显示*/
 .header .navbar .logo .spring-logo {
-	margin: 12px 0 6px;
-	width: 160px;
-	height: 46px;
-	display: inline-block;
-	text-decoration: none
+    margin: 12px 0 6px;
+    width: 160px;
+    height: 46px;
+    display: inline-block;
+    text-decoration: none
 }
 
 /*栏目方块*/
 .header .navbar .navLink a {
-	color: #eee;
-	text-transform: uppercase;
-	text-shadow: none;
-	font-size: 14px;
-	line-height: 14px;
-	padding: 28px 20px;
-	transition: all .15s;
-	-webkit-transition: all .15s;
-	-moz-transition: all .15s;
-	-o-transition: all .15s;
-	-ms-transition: all .15s
+    color: #eee;
+    text-transform: uppercase;
+    text-shadow: none;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 28px 20px;
+    transition: all .15s;
+    -webkit-transition: all .15s;
+    -moz-transition: all .15s;
+    -o-transition: all .15s;
+    -ms-transition: all .15s
 }
 
 /*活动栏目高亮*/
 .header .navbar .navLink.active a {
-	background-color: #6db33f;
-	box-shadow: none
+    background-color: #6db33f;
+    box-shadow: none
 }
 
 .header .navbar .navLink:hover a {
-	color: #eee;
-	background-color: #6db33f
+    color: #eee;
+    background-color: #6db33f
 }
 
 /*logo图片地址*/
 a.spring-logo {
-	background: url(../images/spring-logo.png) -1px -1px no-repeat
+    background: url(../images/spring-logo.png) -1px -1px no-repeat
 }
 
 /*鼠标悬停变色，要配合下面的样式*/
 a.spring-logo span {
-	display: block;
-	width: 160px;
-	height: 46px;
-	background: url(../images/spring-logo.png) -1px -48px no-repeat;
-	opacity: 0;
-	-moz-transition: opacity .12s ease-in-out;
-	-webkit-transition: opacity .12s ease-in-out;
-	-o-transition: opacity .12s ease-in-out
+    display: block;
+    width: 160px;
+    height: 46px;
+    background: url(../images/spring-logo.png) -1px -48px no-repeat;
+    opacity: 0;
+    -moz-transition: opacity .12s ease-in-out;
+    -webkit-transition: opacity .12s ease-in-out;
+    -o-transition: opacity .12s ease-in-out
 }
+
 /*鼠标悬停变色，要配合上面的样式*/
 a:hover.spring-logo span {
-	opacity: 1
+    opacity: 1
 }
 
 /*头部栏目条大小调整,栏目区域靠右*/
 .nav {
-	position: relative;
-	left: 0;
-	display: block;
-	margin: 0 10px 0 0;
-	float: right;
+    position: relative;
+    left: 0;
+    display: block;
+    margin: 0 10px 0 0;
+    float: right;
 }
 
 /*栏目中li靠左排列*/
-.nav>li {
-	float: left;
-	line-height: 20px;
-	display: list-item;
-	text-align: -webkit-match-parent;
+.nav > li {
+    float: left;
+    line-height: 20px;
+    display: list-item;
+    text-align: -webkit-match-parent;
 }
 
 /*栏目区域上下居中*/
-.nav>li>a {
-	display: block;
+.nav > li > a {
+    display: block;
 }

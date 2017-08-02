@@ -6,10 +6,10 @@ import java.util.List;
 
 
 /**
-* Description:
-* author  dyenigma
-* date 2017/07/21
-*/
+ * Description:
+ * author  dyenigma
+ * date 2017/07/21
+ */
 public interface ISysUserPmsnService extends IBaseService<SysUserPmsn> {
     /**
      * 保存分配用户权限

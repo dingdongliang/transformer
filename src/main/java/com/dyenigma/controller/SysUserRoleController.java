@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.List;
 @Controller
 @Api(description = "用户角色分配API")
 @RequestMapping(value = "/manage/userRole")
-public class SysUserRoleController  {
+public class SysUserRoleController {
 
     private final Logger logger = LoggerFactory.getLogger(SysUserRoleController.class);
 
@@ -42,30 +43,35 @@ public class SysUserRoleController  {
         return "manage/userRole/userRoleMain";
     }
 
+    @ResponseBody
     @PostMapping
     public Result add(SysUserRole sysUserRole) {
         sysUserRoleService.save(sysUserRole);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         sysUserRoleService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @PutMapping
     public Result update(SysUserRole sysUserRole) {
         sysUserRoleService.update(sysUserRole);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
         SysUserRole sysUserRole = sysUserRoleService.findById(id);
         return ResultGenerator.genSuccessResult(sysUserRole);
     }
 
+    @ResponseBody
     @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);

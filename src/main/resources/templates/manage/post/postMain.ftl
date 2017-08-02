@@ -176,7 +176,7 @@
                                     });
 
                                     request.done(function (rsp) {
-                                        if (rsp.code==200) {
+                                        if (rsp.code == 200) {
                                             $("#dg").treegrid('remove', node.postId);
                                         }
                                         $.messager.show({

@@ -15,13 +15,12 @@ public class DESUtil {
     /**
      * DES算法密钥
      */
-    private static final byte[] DES_KEY = { 21, 1, -110, 82, -32, -85, -128, -65 };
+    private static final byte[] DES_KEY = {21, 1, -110, 82, -32, -85, -128, -65};
 
     /**
      * 数据加密，算法（DES）
      *
-     * @param data
-     *            要进行加密的数据
+     * @param data 要进行加密的数据
      * @return 加密后的数据
      */
     @SuppressWarnings("restriction")
@@ -49,8 +48,7 @@ public class DESUtil {
     /**
      * 数据解密，算法（DES）
      *
-     * @param cryptData
-     *            加密数据
+     * @param cryptData 加密数据
      * @return 解密后的数据
      */
     @SuppressWarnings("restriction")

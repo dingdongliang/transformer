@@ -362,7 +362,7 @@
                                         method: "POST",
                                         dataType: "JSON",
                                         success: function (rsp) {
-                                            if (rsp.code==200) {
+                                            if (rsp.code == 200) {
                                                 $dg.datagrid('deleteRow', rowIndex);
                                             }
                                             $.messager.show({

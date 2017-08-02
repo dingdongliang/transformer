@@ -160,7 +160,7 @@ public class SysProjectService extends BaseService<SysProject> implements
         }
         //当所有值都处理完毕以后，剩下的map值就是：原来有对应关系，修改后没有对应关系，删除之
         for (Map.Entry<String, SysPrjRole> entry : map.entrySet()) {
-            mapper.deleteByPrimaryKey(entry.getValue().getPrId());
+            sysPrjRoleMapper.deleteByPrimaryKey(entry.getValue().getPrId());
         }
 
         return true;

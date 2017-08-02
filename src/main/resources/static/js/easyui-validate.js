@@ -45,7 +45,7 @@ $.extend($.fn.validatebox.defaults.rules, {
     //数字
     number: {
         validator: function (value) {
-            var reg =/^[0-9]*$/;
+            var reg = /^[0-9]*$/;
             return reg.test(value);
         },
         message: '只能是数字'

@@ -353,30 +353,35 @@ public class SysUserController {
         return sysUserPmsnService.findByUserId(userId);
     }
 
+    @ResponseBody
     @PostMapping
     public Result add(SysUser sysUser) {
         sysUserService.save(sysUser);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         sysUserService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @PutMapping
     public Result update(SysUser sysUser) {
         sysUserService.update(sysUser);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
         SysUser sysUser = sysUserService.findById(id);
         return ResultGenerator.genSuccessResult(sysUser);
     }
 
+    @ResponseBody
     @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);

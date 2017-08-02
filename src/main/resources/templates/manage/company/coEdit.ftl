@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
     $(function () {
         $("#prntId").combotree({
@@ -24,7 +23,7 @@
             success: function (result) {
                 $.messager.progress('close');
                 result = $.parseJSON(result);
-                if (result.code==200) {
+                if (result.code == 200) {
                     $.modalDialog.openner.treegrid('reload');
                     $.modalDialog.handler.dialog('close');
                     $.messager.show({

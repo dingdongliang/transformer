@@ -37,15 +37,17 @@ img {
     display: block;
     border: 0px;
 }
+
 /*end*/
 .weizi {
     width: 730px;
     height: 30px;
-    padding-bottom:6px;
+    padding-bottom: 6px;
     line-height: 30px;
     background: url("../images/weizi.png") 7px 5px no-repeat;
     border-bottom: 1px solid #6db33f;
 }
+
 /*about*/
 #content #about_me {
     width: 730px;
@@ -58,6 +60,7 @@ img {
     margin-top: 10px;
     padding: 0 10px;
 }
+
 /*碎言碎语*/
 #say {
     width: 950px;
@@ -74,8 +77,7 @@ img {
 
 .say_box {
     background: #f8f8f8;
-    box-shadow: 0px 1px 0px rgba(255, 255, 255, .1), inset 0px 1px 1px
-    rgba(214, 214, 214, 0.7);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, .1), inset 0px 1px 1px rgba(214, 214, 214, 0.7);
     width: 740px;
     border-radius: 5px;
     position: relative;
@@ -100,7 +102,9 @@ img {
     position: absolute;
     left: 740px;
     top: 23px;
-} /* 三角形 */
+}
+
+/* 三角形 */
 .say_box::after {
     content: "";
     width: 10px;
@@ -112,14 +116,20 @@ img {
     background: #CCCCCE;
     border: 2px solid #fff;
     transition: all 0.5s;
-} /* 圆形 */
+}
+
+/* 圆形 */
 .say_box:hover::before {
     border-color: transparent transparent transparent #CECCCD
-} /* 三角形 */
+}
+
+/* 三角形 */
 .say_box:hover::after {
     border: #fff 2px solid;
     background: #999;
-} /* 圆形 */
+}
+
+/* 圆形 */
 .say_box:hover {
     background: #f4f2f2;
     color: #333;
@@ -139,6 +149,7 @@ img {
     font-weight: bold;
     font-size: 14px;
 }
+
 /*日记*/
 #content #riji {
     width: 730px;
@@ -160,7 +171,7 @@ img {
     width: 120px;
     height: 145px;
     background: url("../images/line_bg.jpg") 60px 0px repeat-y;
-    filter: Alpha(opacity = 80);
+    filter: Alpha(opacity=80);
     -moz-opacity: 0.8;
     opacity: 0.8;
 }
@@ -175,7 +186,7 @@ img {
     height: 100px;
     background: #fff;
     border: 1px solid #E0DFDF;
-    filter: Alpha(opacity = 80);
+    filter: Alpha(opacity=80);
     -moz-opacity: 0.8;
     opacity: 0.8;
     margin: 10px 10px 0px 10px;
@@ -191,6 +202,7 @@ img {
     left: -14px;
     z-index: 1;
 }
+
 /*相册*/
 #content_xc {
     width: 990px;
@@ -346,6 +358,7 @@ span.bds_more {
 .p_t {
     padding-top: 7px;
 }
+
 /*学无止境*/
 #content #learn {
     width: 730px;
@@ -429,6 +442,7 @@ span.bds_more {
 #news .news_content .news_text {
     width: 710px;
 }
+
 /*留言板*/
 #content #guestbook {
     width: 730px;
@@ -441,6 +455,7 @@ span.bds_more {
     margin-top: 10px;
     padding: 0 10px;
 }
+
 /*底部样式三个*/
 .footer {
     background-color: #34302d;

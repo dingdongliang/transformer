@@ -24,7 +24,6 @@
     </sql>
 
 
-
     <select id="findAll" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>

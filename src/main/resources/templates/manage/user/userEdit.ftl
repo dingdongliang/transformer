@@ -17,7 +17,7 @@
             success: function (result) {
                 $.messager.progress('close');
                 result = eval("(" + result + ")");
-                if (result.code==200) {
+                if (result.code == 200) {
                     //注意这里的datagrid，要和主页面的保持一致
                     $.modalDialog.openner.datagrid('reload');
                     $.modalDialog.handler.dialog('close');

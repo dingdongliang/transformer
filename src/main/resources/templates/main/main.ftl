@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
 
@@ -151,7 +150,7 @@
         </div>
     </div>
     <!--left end-->
-    <#include 'right.ftl'>
+<#include 'right.ftl'>
     <div class="clear"></div>
 </div>
 <!--content end-->

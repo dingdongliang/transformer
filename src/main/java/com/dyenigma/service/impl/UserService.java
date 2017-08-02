@@ -8,18 +8,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
-* Description:
-* author  dyenigma
-* date 2017/07/28
-*/
+ * Description:
+ * author  dyenigma
+ * date 2017/07/28
+ */
 @Service
 @Transactional
 public class UserService extends BaseService<User> implements
-IUserService {
+        IUserService {
 
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
 

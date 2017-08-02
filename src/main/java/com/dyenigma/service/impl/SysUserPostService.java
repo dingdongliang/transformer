@@ -36,7 +36,7 @@ public class SysUserPostService extends BaseService<SysUserPost> implements
      * Time:2016/4/28 10:36
      * param:[postId]
      * return:java.util.List<com.dyenigma.entity.Integer>
-     *
+     * <p>
      * param postId
      */
     @Override

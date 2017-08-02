@@ -7,10 +7,10 @@ import java.util.List;
 
 
 /**
-* Description:
-* author  dyenigma
-* date 2017/07/21
-*/
+ * Description:
+ * author  dyenigma
+ * date 2017/07/21
+ */
 public interface ISysPrjUserService extends IBaseService<SysPrjUser> {
     List<SysUser> getPrjUserByPrjId(String prjId);
 }

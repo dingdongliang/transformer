@@ -218,7 +218,7 @@
                                             "roleId": row.roleId
                                         },
                                         success: function (rsp) {
-                                            if (rsp.code==200) {
+                                            if (rsp.code == 200) {
                                                 $role.datagrid('deleteRow', rowIndex);
                                             }
                                             $.messager.show({

@@ -196,7 +196,7 @@
             text-decoration: none;
         }
 
-        #backUpA:active{
+        #backUpA:active {
             color: red;
         }
 

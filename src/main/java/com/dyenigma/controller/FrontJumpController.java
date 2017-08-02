@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @Api(description = "客户前端页面展示API")
 @RequestMapping(value = "/front")
-public class FrontJumpController  {
+public class FrontJumpController {
 
     private final Logger logger = LoggerFactory.getLogger(FrontJumpController.class);
 

@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Import;
 @ServletComponentScan
 public class TransformerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TransformerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TransformerApplication.class, args);
+    }
 }

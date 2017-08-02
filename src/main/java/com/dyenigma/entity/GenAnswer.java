@@ -37,7 +37,7 @@ public class GenAnswer extends BaseDomain {
     @Column(name = "ANSR_OPOS")
     private Integer ansrOpos;
 
-     /**
+    /**
      * 获取问题ID
      *
      * @return QSTN_ID - 问题ID

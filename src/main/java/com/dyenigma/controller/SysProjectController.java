@@ -37,7 +37,7 @@ import java.util.List;
 @Controller
 @Api(description = "编辑项目组API")
 @RequestMapping(value = "/manage/project")
-public class SysProjectController  {
+public class SysProjectController {
 
     private final Logger logger = LoggerFactory.getLogger(SysProjectController.class);
 
@@ -85,6 +85,7 @@ public class SysProjectController  {
      * param:[prj]
      * return:java.lang.String
      */
+    @ResponseBody
     @RequestMapping(value = "/saveOrUpdatePrj", produces = "application/json;charset=utf-8")
     public Result saveOrUpdatePrj(SysProject prj) {
 
@@ -103,6 +104,7 @@ public class SysProjectController  {
      * param:[request]
      * return:java.lang.String
      */
+    @ResponseBody
     @RequestMapping(value = "/delPrj", produces = "application/json;charset=utf-8")
     public Result delPrj(HttpServletRequest request) {
         String prjId = request.getParameter("prjId");
@@ -122,6 +124,7 @@ public class SysProjectController  {
      * param:[request]
      * return:java.util.List<com.dyenigma.entity.SysProject>
      */
+    @ResponseBody
     @RequestMapping(value = "/prjRole", produces = "application/json;charset=utf-8")
     public List<SysProject> prjRole(HttpServletRequest request) {
         String coId = request.getParameter("coId");
@@ -137,6 +140,7 @@ public class SysProjectController  {
      * param:[request]
      * return:java.lang.String
      */
+    @ResponseBody
     @RequestMapping(value = "/savePrjRoles", produces = "application/json;charset=utf-8")
     public Result savePrjRoles(HttpServletRequest request) {
         String prjId = request.getParameter("prjId");
@@ -157,6 +161,7 @@ public class SysProjectController  {
      * param:[request]
      * return:java.lang.String
      */
+    @ResponseBody
     @RequestMapping(value = "/savePrjUsers", produces = "application/json;charset=utf-8")
     public Result savePrjUsers(HttpServletRequest request) {
         String prjId = request.getParameter("prjId");
@@ -170,6 +175,7 @@ public class SysProjectController  {
 
     }
 
+    @ResponseBody
     @RequestMapping(value = "/searchPrjUser", produces = "application/json;charset=utf-8")
     public List<SysUser> searchPrjUser(HttpServletRequest request) {
         String prjId = request.getParameter("prjId");
@@ -223,30 +229,35 @@ public class SysProjectController  {
         return sysPrjUserService.getPrjUserByPrjId(prjId);
     }
 
+    @ResponseBody
     @PostMapping
     public Result add(SysProject sysProject) {
         sysProjectService.save(sysProject);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         sysProjectService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @PutMapping
     public Result update(SysProject sysProject) {
         sysProjectService.update(sysProject);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
         SysProject sysProject = sysProjectService.findById(id);
         return ResultGenerator.genSuccessResult(sysProject);
     }
 
+    @ResponseBody
     @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);

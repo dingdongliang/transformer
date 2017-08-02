@@ -36,7 +36,7 @@ import java.util.List;
 @Controller
 @Api(description = "编辑权限API")
 @RequestMapping(value = "/manage/role")
-public class SysRoleController  {
+public class SysRoleController {
 
     private final Logger logger = LoggerFactory.getLogger(SysRoleController.class);
     @Resource
@@ -173,30 +173,35 @@ public class SysRoleController  {
         }
     }
 
+    @ResponseBody
     @PostMapping
     public Result add(SysRole sysRole) {
         sysRoleService.save(sysRole);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         sysRoleService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @PutMapping
     public Result update(SysRole sysRole) {
         sysRoleService.update(sysRole);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
         SysRole sysRole = sysRoleService.findById(id);
         return ResultGenerator.genSuccessResult(sysRole);
     }
 
+    @ResponseBody
     @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);

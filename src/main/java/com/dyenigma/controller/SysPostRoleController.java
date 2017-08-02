@@ -9,7 +9,6 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,19 +16,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Description:
-* author  dyenigma
-* date 2017/07/21
-*/
-@Controller
+ * Description:
+ * author  dyenigma
+ * date 207/21
+ */
+@RestController
 @Api(description = "岗位-权限分配API")
 @RequestMapping("/sys/post/role")
-public class SysPostRoleController  {
+public class SysPostRoleController {
 
     private final Logger logger = LoggerFactory.getLogger(SysPostRoleController.class);
 

@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="/css/head.css" type="text/css"/>
 <script type="text/javascript">
     $(function () {

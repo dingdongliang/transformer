@@ -6,10 +6,10 @@ import java.util.List;
 
 
 /**
-* Description:
-* author  dyenigma
-* date 2017/07/21
-*/
+ * Description:
+ * author  dyenigma
+ * date 2017/07/21
+ */
 public interface ISysPostRoleService extends IBaseService<SysPostRole> {
     /**
      * 保存分配岗位角色

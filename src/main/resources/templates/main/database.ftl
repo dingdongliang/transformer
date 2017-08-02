@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
@@ -56,7 +55,7 @@
 
     </div>
     <!--end left -->
-    <#include 'right.ftl'>
+<#include 'right.ftl'>
     <div class="clear"></div>
 </div>
 <!--content end-->

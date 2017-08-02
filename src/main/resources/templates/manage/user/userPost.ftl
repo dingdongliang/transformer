@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
     $('#postList').tree({
         url: '/manage/users/getPostList',

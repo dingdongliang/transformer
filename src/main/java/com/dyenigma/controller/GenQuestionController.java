@@ -33,7 +33,7 @@ import java.util.List;
 @Controller
 @Api(description = "问题操作API")
 @RequestMapping(value = "/manage/qstn")
-public class GenQuestionController  {
+public class GenQuestionController {
     private final Logger logger = LoggerFactory.getLogger(GenQuestionController.class);
 
     @Resource
@@ -68,11 +68,13 @@ public class GenQuestionController  {
     }
 
     @PostMapping
+    @ResponseBody
     public Result add(GenQuestion genQuestion) {
         genQuestionService.save(genQuestion);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         genQuestionService.deleteById(id);
@@ -80,18 +82,21 @@ public class GenQuestionController  {
     }
 
     @PutMapping
+    @ResponseBody
     public Result update(GenQuestion genQuestion) {
         genQuestionService.update(genQuestion);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
+    @ResponseBody
     public Result detail(@PathVariable Integer id) {
         GenQuestion genQuestion = genQuestionService.findById(id);
         return ResultGenerator.genSuccessResult(genQuestion);
     }
 
     @GetMapping("/list")
+    @ResponseBody
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<GenQuestion> list = genQuestionService.findAll();

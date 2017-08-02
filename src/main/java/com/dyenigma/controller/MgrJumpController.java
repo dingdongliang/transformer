@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @ApiIgnore
 @RequestMapping(value = "/manage")
-public class MgrJumpController  {
+public class MgrJumpController {
 
     private final Logger logger = LoggerFactory.getLogger(MgrJumpController.class);
 

@@ -128,29 +128,34 @@ public class SysDivisionController {
     }
 
     @PostMapping
+    @ResponseBody
     public Result add(SysDivision sysDivision) {
         sysDivisionService.save(sysDivision);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         sysDivisionService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @PutMapping
     public Result update(SysDivision sysDivision) {
         sysDivisionService.update(sysDivision);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
         SysDivision sysDivision = sysDivisionService.findById(id);
         return ResultGenerator.genSuccessResult(sysDivision);
     }
 
+    @ResponseBody
     @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);

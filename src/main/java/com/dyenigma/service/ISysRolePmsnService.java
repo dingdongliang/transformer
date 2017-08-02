@@ -7,10 +7,10 @@ import java.util.List;
 
 
 /**
-* Description:
-* author  dyenigma
-* date 2017/07/21
-*/
+ * Description:
+ * author  dyenigma
+ * date 2017/07/21
+ */
 public interface ISysRolePmsnService extends IBaseService<SysRolePmsn> {
     /**
      * 好代码自己会说话

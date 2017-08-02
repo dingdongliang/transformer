@@ -19,14 +19,14 @@ import java.util.List;
 
 
 /**
-* Description:
-* author  dyenigma
-* date 2017/07/21
-*/
+ * Description:
+ * author  dyenigma
+ * date 2017/07/21
+ */
 @Service
 @Transactional
 public class SysDivisionService extends BaseService<SysDivision> implements
-ISysDivisionService { 
+        ISysDivisionService {
 
     @Autowired
     private SysPostMapper sysPostMapper;

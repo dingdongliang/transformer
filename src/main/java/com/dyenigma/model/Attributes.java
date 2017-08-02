@@ -16,7 +16,6 @@ import com.dyenigma.entity.BaseDomain;
  * Description: 状态属性, TreeModel模型中调用
  * author dingdongliang
  * date 2015年9月23日 上午11:17:19
- *
  */
 
 public class Attributes extends BaseDomain {

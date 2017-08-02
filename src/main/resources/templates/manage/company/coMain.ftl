@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>公司管理</title>
-    <#include '../include.ftl'>
+<#include '../include.ftl'>
     <script type="text/javascript">
 
         $(function () {
@@ -108,7 +108,7 @@
                                     'coId': row.coId
                                 },
                                 success: function (rsp) {
-                                    if (rsp.code==200) {
+                                    if (rsp.code == 200) {
                                         $("#dg").treegrid('remove', row.coId);
                                     }
                                     $.messager.show({

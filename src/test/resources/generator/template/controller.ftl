@@ -25,40 +25,40 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("${baseRequestMapping}")
 public class ${modelNameUpperCamel}Controller{
 
-    private final Logger logger = LoggerFactory.getLogger(${modelNameUpperCamel}Controller.class);
+private final Logger logger = LoggerFactory.getLogger(${modelNameUpperCamel}Controller.class);
 
-    @Resource
-    private I${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
+@Resource
+private I${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
-    @PostMapping("/add")
-    public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
-        return ResultGenerator.genSuccessResult();
-    }
+@PostMapping("/add")
+public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
+${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
+return ResultGenerator.genSuccessResult();
+}
 
-    @PostMapping("/delete")
-    public Result delete(@RequestParam Integer id) {
-        ${modelNameLowerCamel}Service.deleteById(id);
-        return ResultGenerator.genSuccessResult();
-    }
+@PostMapping("/delete")
+public Result delete(@RequestParam Integer id) {
+${modelNameLowerCamel}Service.deleteById(id);
+return ResultGenerator.genSuccessResult();
+}
 
-    @PostMapping("/update")
-    public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
-        return ResultGenerator.genSuccessResult();
-    }
+@PostMapping("/update")
+public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
+${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
+return ResultGenerator.genSuccessResult();
+}
 
-    @PostMapping("/detail")
-    public Result detail(@RequestParam Integer id) {
-        ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
-        return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
-    }
+@PostMapping("/detail")
+public Result detail(@RequestParam Integer id) {
+${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
+return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
+}
 
-    @PostMapping("/list")
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
-        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
-    }
+@PostMapping("/list")
+public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+PageHelper.startPage(page, size);
+List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
+PageInfo pageInfo = new PageInfo(list);
+return ResultGenerator.genSuccessResult(pageInfo);
+}
 }

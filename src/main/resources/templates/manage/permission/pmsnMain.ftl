@@ -3,7 +3,7 @@
 <head>
 
     <title>菜单管理</title>
-    <#include '../include.ftl'>
+<#include '../include.ftl'>
     <script type="text/javascript">
         var $dg;
         var $grid;
@@ -219,7 +219,7 @@
                                     });
 
                                     request.done(function (rsp) {
-                                        if (rsp.code==200) {
+                                        if (rsp.code == 200) {
                                             $dg.treegrid('remove', node.pmsnId);
                                         }
                                         $.messager.show({

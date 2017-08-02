@@ -152,30 +152,35 @@ public class SysPermissionController {
         }
     }
 
+    @ResponseBody
     @PostMapping
     public Result add(SysPermission sysPermission) {
         sysPermissionService.save(sysPermission);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         sysPermissionService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @PutMapping
     public Result update(SysPermission sysPermission) {
         sysPermissionService.update(sysPermission);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
         SysPermission sysPermission = sysPermissionService.findById(id);
         return ResultGenerator.genSuccessResult(sysPermission);
     }
 
+    @ResponseBody
     @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);

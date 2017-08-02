@@ -29,7 +29,7 @@ public class GenQuestionService extends BaseService<GenQuestion> implements
      * Time:2016/5/13 11:10
      * param:[pageUtil]
      * return:java.util.List<com.dyenigma.entity.GenQuestion>
-     *
+     * <p>
      * param pageUtil
      */
     @Override
@@ -44,7 +44,7 @@ public class GenQuestionService extends BaseService<GenQuestion> implements
      * Time:2016/5/13 11:04
      * param:[userId]
      * return:java.util.List<com.dyenigma.entity.GenQuestion>
-     *
+     * <p>
      * param userId
      */
     @Override
@@ -59,7 +59,7 @@ public class GenQuestionService extends BaseService<GenQuestion> implements
      * Time:2016/5/13 11:04
      * param:[start, end]
      * return:java.util.List<com.dyenigma.entity.GenQuestion>
-     *
+     * <p>
      * param start
      * param end
      */
@@ -75,7 +75,7 @@ public class GenQuestionService extends BaseService<GenQuestion> implements
      * Time:2016/5/13 11:04
      * param:[key]
      * return:java.util.List<com.dyenigma.entity.GenQuestion>
-     *
+     * <p>
      * param key
      */
     @Override
@@ -90,7 +90,7 @@ public class GenQuestionService extends BaseService<GenQuestion> implements
      * Time:2016/5/13 11:05
      * param:[word]
      * return:java.util.List<com.dyenigma.entity.GenQuestion>
-     *
+     * <p>
      * param word
      */
     @Override

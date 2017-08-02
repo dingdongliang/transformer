@@ -1,9 +1,4 @@
-﻿
-
-var rmd_sta = 0;
-
-
-
+﻿var rmd_sta = 0;
 
 
 //$(function () {
@@ -59,11 +54,9 @@ var rmd_sta = 0;
 //    $(".nin").html(html);
 
 
-
 //});
 
 $(function () {
-
 
 
     var html = "";
@@ -124,7 +117,7 @@ $(function () {
 
     html += '<div class="img"></div>';
 
-   // html += '<div class="item">';
+    // html += '<div class="item">';
 
     html += '<ul></ul>';
 
@@ -134,7 +127,6 @@ $(function () {
 
     html += '</div>'; //txt end
 
-  
 
     html += '</div>'; //sd_cen end
 
@@ -143,19 +135,7 @@ $(function () {
     $(document.body).append(html);
 
 
-
-
-
-
-
 });
-
- 
-
-
-
-
-
 
 
 function my_rmd() {
@@ -163,7 +143,6 @@ function my_rmd() {
     $(document.body).append('<div class="screen_msg" id="screen_msg"></div>');
 
     $(".screen_msg").height($(window).height());
-
 
 
     $("embed").each(function () {
@@ -181,7 +160,6 @@ function my_rmd() {
     $("#screen_msg").css("background", "#000");
 
     $("#screen_msg").css("opacity", "0");
-
 
 
     var ti = setTimeout(function () {
@@ -202,7 +180,7 @@ function my_rmd() {
 
     }, 500);
 
-    $("#screen_msg").animate({ opacity: '0.5' }, 1000);
+    $("#screen_msg").animate({opacity: '0.5'}, 1000);
 
     var ie = ietester();
 
@@ -230,7 +208,6 @@ function my_rmd() {
 
         $(".sd_main").css("top", "15px");
 
-     
 
         $(".sd_main").css("left", ($(document).width() - $(".sd_main").width()) / 2 + "px");
 
@@ -288,7 +265,7 @@ function my_rmd() {
 
         $(".sd_cen .txt .cen1:eq(1) ul").html(articles2);
 
-       // $(".sd_cen .txt .cen1:eq(2) ul").html(articles3);
+        // $(".sd_cen .txt .cen1:eq(2) ul").html(articles3);
 
         //$(".sd_cen .imgtxt ul").html(imgs);
 
@@ -297,20 +274,16 @@ function my_rmd() {
     });
 
 
-
 }
-
-
-
 
 
 function close_my_rmd() {
 
     $(window).unbind("scroll");
 
-    var left = $(".a4").offset().left; 
+    var left = $(".a4").offset().left;
 
-    $(".sd_main").animate({ left: (left + 5) + "px", top: "1px", height: "30px", width: "80px" }, 500, function () {
+    $(".sd_main").animate({left: (left + 5) + "px", top: "1px", height: "30px", width: "80px"}, 500, function () {
 
         $(".sd_main").attr("style", "");
 
@@ -345,26 +318,25 @@ function close_my_rmd() {
 }
 
 
-
 function ietester() {
 
     var undef,
 
-		ie,
+        ie,
 
-		v = 3,
+        v = 3,
 
-		div = document.createElement('div'),
+        div = document.createElement('div'),
 
-		all = div.getElementsByTagName('i');
+        all = div.getElementsByTagName('i');
 
     while (
 
-			div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
+        div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
 
-			all[0]
+            all[0]
 
-		);
+        );
 
     v > 4 ? ie = v : ie = undef;
 
@@ -417,13 +389,10 @@ function ietester() {
 //function my_rmd() {
 
 
-
 //    $(document.body).append('<div class="screen_msg" id="screen_msg"></div>');
 
 
-
 //    $(".screen_msg").height($(window).height());
-
 
 
 //     
@@ -443,7 +412,6 @@ function ietester() {
 //    $("#screen_msg").css("background", "#000");
 
 //    $("#screen_msg").css("opacity", "0");
-
 
 
 //    var ti = setTimeout(function () {
@@ -467,7 +435,6 @@ function ietester() {
 //        clearTimeout(ti);
 
 //    }, 500);
-
 
 
 //    $("#screen_msg").animate({ opacity: '0.5' }, 1000);
@@ -519,7 +486,6 @@ function ietester() {
 //        var img_t = 0;
 
 //        var article_t = 0;
-
 
 
 //        for (i = 0; i < data.length; i++) {
@@ -575,7 +541,6 @@ function ietester() {
 //}
 
 
-
 function ResizeImage(src, size) {
 
     var ret = "";
@@ -586,13 +551,13 @@ function ResizeImage(src, size) {
 
     }
 
-    catch (e) { }
+    catch (e) {
+    }
 
     return ret;
 
 }
 
- 
 
 $(function () {
 
@@ -612,7 +577,10 @@ $(function () {
 
     }
 
-    $(document.forms["so_form"]).submit(function () { goSearch(document.forms["so_form"]); return false; });
+    $(document.forms["so_form"]).submit(function () {
+        goSearch(document.forms["so_form"]);
+        return false;
+    });
 
 });
 
@@ -683,7 +651,6 @@ function SetCookie(value, name, key) {
 }
 
 
-
 function GetCookie(name, key) {
 
     var nameValue = "";
@@ -719,7 +686,6 @@ function GetCookie(name, key) {
 }
 
 
-
 function KillCookie(name) {
 
     var exp = new Date();
@@ -729,13 +695,9 @@ function KillCookie(name) {
     var cval = getCookie(name);
 
 
-
     if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString() + ";domain=7y7.com";
 
 }
-
-
-
 
 
 function shareour() {
@@ -759,9 +721,7 @@ function shareour() {
     $("#share").css("left", (window_w - obj_w) / 2 + "px");
 
 
-
     $("#share").append("<div class=\"share_title\">");
-
 
 
     $("#share .share_title").html("<span class=\"share_title1\">推荐给您的好朋友</span><i class=\"close\"></i>");
@@ -781,9 +741,6 @@ function shareour() {
     var obj = $("#jiathis_style_32x32");
 
     $("#jiathis_style_32x32").remove();
-
-
-
 
 
     $("#share").fadeIn(100, function () {
@@ -875,17 +832,14 @@ function copycilp(txt) {
     }
 
 
-
 }
 
 function resetimgsize(img, width) {
 
 
-
     if (img.width > width) {
 
         img.width = width;
-
 
 
         $(img).css("margin", "0 auto");
@@ -903,9 +857,6 @@ function getPath(id) {
     return ((len > 1) ? id.substr(len - 2, len) : "0" + id) + "/" + id + ".html";
 
 }
-
-
-
 
 
 function ParseArticlePath(id, rootpath, isSubDomain1, isSubDomain2) {
@@ -959,7 +910,6 @@ function ParseSubRootPath(id, rootpath, isSubDomain1, isSubDomain2) {
 }
 
 
-
 function fontsize(size) {
 
     $(".jies").css("font-size", size + "px");
@@ -969,13 +919,11 @@ function fontsize(size) {
 }
 
 
-
 function openQQ() {
 
     var A = window.open("http://www.7y7.com/api/logintoqq.aspx");
 
 }
-
 
 
 function openUrl(url) {
@@ -1014,7 +962,8 @@ function SetHome(obj, vrl) {
 
     try {
 
-        obj.style.behavior = 'url(#default#homepage)'; obj.setHomePage(vrl);
+        obj.style.behavior = 'url(#default#homepage)';
+        obj.setHomePage(vrl);
 
     }
 
@@ -1057,19 +1006,14 @@ String.prototype.DelBr = function () {
 }
 
 
-
 function delHtmlTag(str) {
 
-    return str.replace(/<[^>]+>/g, "");  
+    return str.replace(/<[^>]+>/g, "");
 
 }
 
 
-
-
-
 function byteLength(sStr) {
-
 
 
     aMatch = sStr.match(/[^\x00-\x80]/g);
@@ -1079,11 +1023,7 @@ function byteLength(sStr) {
 }
 
 
-
-
-
 function changeMaxLen(obj, len1, location) {
-
 
 
     var len = len1;
@@ -1117,9 +1057,7 @@ function changeMaxLen(obj, len1, location) {
     lenText.innerHTML = len - byteLength(obj.value);
 
 
-
 }
-
 
 
 function getPhotoPath(type) {
@@ -1152,7 +1090,8 @@ function getPhotoPath(type) {
 
             break;
 
-        default: str = "";
+        default:
+            str = "";
 
             break;
 
@@ -1163,6 +1102,15 @@ function getPhotoPath(type) {
 }
 
 
-
-function AddFavorite(sURL, sTitle) { try { window.external.addFavorite(sURL, sTitle); } catch (e) { try { window.sidebar.addPanel(sTitle, sURL, ""); } catch (e) { alert("加入收藏失败，请使用Ctrl+D进行添加"); } } }
+function AddFavorite(sURL, sTitle) {
+    try {
+        window.external.addFavorite(sURL, sTitle);
+    } catch (e) {
+        try {
+            window.sidebar.addPanel(sTitle, sURL, "");
+        } catch (e) {
+            alert("加入收藏失败，请使用Ctrl+D进行添加");
+        }
+    }
+}
 

@@ -7,10 +7,10 @@ import java.util.List;
 
 
 /**
-* Description:
-* author  dyenigma
-* date 2017/07/21
-*/
+ * Description:
+ * author  dyenigma
+ * date 2017/07/21
+ */
 public interface ISysProjectService extends IBaseService<SysProject> {
     /**
      * Description:查询公司所属项目组信息

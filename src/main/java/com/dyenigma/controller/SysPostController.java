@@ -36,7 +36,7 @@ import java.util.List;
 @Controller
 @Api(description = "岗位管理API")
 @RequestMapping(value = "/manage/post")
-public class SysPostController  {
+public class SysPostController {
 
     private final Logger logger = LoggerFactory.getLogger(SysPostController.class);
 
@@ -186,30 +186,35 @@ public class SysPostController  {
         return sysPostRoleService.getPostRoleByPostId(postId);
     }
 
+    @ResponseBody
     @PostMapping
     public Result add(SysPost sysPost) {
         sysPostService.save(sysPost);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         sysPostService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @PutMapping
     public Result update(SysPost sysPost) {
         sysPostService.update(sysPost);
         return ResultGenerator.genSuccessResult();
     }
 
+    @ResponseBody
     @GetMapping("/{id}")
     public Result detail(@PathVariable Integer id) {
         SysPost sysPost = sysPostService.findById(id);
         return ResultGenerator.genSuccessResult(sysPost);
     }
 
+    @ResponseBody
     @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);

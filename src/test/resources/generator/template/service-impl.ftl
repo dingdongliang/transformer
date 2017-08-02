@@ -21,9 +21,9 @@ import org.slf4j.LoggerFactory;
 public class ${modelNameUpperCamel}Service extends BaseService<${modelNameUpperCamel}> implements
 I${modelNameUpperCamel}Service {
 
-    private final Logger logger = LoggerFactory.getLogger(${modelNameUpperCamel}Service.class);
+private final Logger logger = LoggerFactory.getLogger(${modelNameUpperCamel}Service.class);
 
-    @Resource
-    private ${modelNameUpperCamel}Mapper ${modelNameLowerCamel}Mapper;
+@Resource
+private ${modelNameUpperCamel}Mapper ${modelNameLowerCamel}Mapper;
 
 }

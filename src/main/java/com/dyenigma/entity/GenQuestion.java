@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "gen_question")
-public class GenQuestion extends BaseDomain  {
+public class GenQuestion extends BaseDomain {
     /**
      * 问题ID
      */
