@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -72,6 +71,7 @@ public class SysProjectController  {
      * return:java.util.List<com.dyenigma.entity.SysProject>
      */
     @RequestMapping(value = "/getPrjByCoId/{coId}", produces = "application/json;charset=utf-8")
+    @ResponseBody
     public List<SysProject> getPrjByCoId(@PathVariable("coId") String coId) {
         return sysProjectService.getPrjByCoId(coId);
     }
@@ -179,39 +179,33 @@ public class SysProjectController  {
     /**
      * param    request
      * param return 参数
-     * return ModelAndView 返回类型
+     * return
      * throws
      * Title: organEditDlg
      * Description: 跳转到编辑组织页面
      */
     @RequestMapping(value = "/toSetRole", method = RequestMethod.GET)
-    public ModelAndView toSetRole() {
+    public String toSetRole() {
 
         logger.debug("toSetRole() is executed!");
 
-        ModelAndView model = new ModelAndView();
-        model.setViewName("manage/project/prjRole");
-
-        return model;
+        return "manage/project/prjRole";
     }
 
     /**
      * param    request
      * param return 参数
-     * return ModelAndView 返回类型
+     * return
      * throws
      * Title: organEditDlg
      * Description: 跳转到编辑组织页面
      */
     @RequestMapping(value = "/toUserList", method = RequestMethod.GET)
-    public ModelAndView toUserList() {
+    public String toUserList() {
 
         logger.debug("toUserList() is executed!");
 
-        ModelAndView model = new ModelAndView();
-        model.setViewName("manage/project/prjUser");
-
-        return model;
+        return "manage/project/prjUser";
     }
 
     @ResponseBody

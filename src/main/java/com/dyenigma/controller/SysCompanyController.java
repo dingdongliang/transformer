@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +50,7 @@ import java.util.List;
 @Controller
 @Api(description = "公司管理API")
 @RequestMapping(value = "/manage/comp")
-public class SysCompanyController  {
+public class SysCompanyController {
 
     private final Logger logger = LoggerFactory.getLogger(SysCompanyController.class);
 
@@ -120,14 +119,11 @@ public class SysCompanyController  {
      * return
      */
     @RequestMapping(value = "/companyEditDlg", method = RequestMethod.GET)
-    public ModelAndView companyEditDlg() {
+    public String companyEditDlg() {
 
         logger.debug("companyEditDlg() is executed!");
 
-        ModelAndView model = new ModelAndView();
-        model.setViewName("manage/company/coEdit");
-
-        return model;
+        return "manage/company/coEdit";
     }
 
 
@@ -183,22 +179,22 @@ public class SysCompanyController  {
         //获取绝对路径,如果realPath获取不到,尝试更换getRealPath方法的参数
         String realPath = request.getSession().getServletContext().getRealPath("/");
 
-        String allPath = realPath + "download" ;
+        String allPath = realPath + "download";
 
         FileOutputStream out = null;
         try {
-            File file= new File(allPath);
-            if(!file.exists()){
+            File file = new File(allPath);
+            if (!file.exists()) {
                 file.mkdirs();
             }
-            out = new FileOutputStream(allPath+ File.separator + path);
+            out = new FileOutputStream(allPath + File.separator + path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         //获取company资料写入文件
         List<SysCompany> list = new ArrayList<>();
-        list.add(sysCompanyService.findBy("coId",companyId));
+        list.add(sysCompanyService.findBy("coId", companyId));
         ExcelUtil<SysCompany> util = new ExcelUtil<>(SysCompany.class);
         util.exportExcel(list, "Sheet", 60000, out);
 

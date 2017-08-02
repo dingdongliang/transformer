@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="<%=basePath%>"/>
-    <meta charset="utf-8">
+
+
     <title>欢迎登录后台管理系统</title>
     <link href="/css/style.css" rel="stylesheet"
           type="text/css"/>

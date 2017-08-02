@@ -18,11 +18,11 @@
     <select id="findAllByPrjId" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from sys_prj_role where PRJ_ID = #{prjId,jdbcType=VARCHAR}
+        from sys_prj_role where PRJ_ID = #{prjId,jdbcType=VARCHAR} and STATUS = 'E'
     </select>
     <select id="findAllByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from sys_prj_role where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+        from sys_prj_role where ROLE_ID = #{roleId,jdbcType=VARCHAR} and STATUS = 'E'
     </select>
 </mapper>

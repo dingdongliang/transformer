@@ -3,7 +3,6 @@ package com.dyenigma.entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 @Table(name = "gen_question")
 public class GenQuestion extends BaseDomain  {
@@ -37,30 +36,6 @@ public class GenQuestion extends BaseDomain  {
      */
     @Column(name = "STATUS")
     private String status;
-
-    /**
-     * 提问日期
-     */
-    @Column(name = "CREATED")
-    private Date created;
-
-    /**
-     * 修改日期
-     */
-    @Column(name = "LASTMOD")
-    private Date lastmod;
-
-    /**
-     * 问题录入员
-     */
-    @Column(name = "CREATER")
-    private String creater;
-
-    /**
-     * 修改人
-     */
-    @Column(name = "MODIFYER")
-    private String modifyer;
 
     /**
      * 获取问题ID
@@ -152,75 +127,5 @@ public class GenQuestion extends BaseDomain  {
         this.status = status;
     }
 
-    /**
-     * 获取提问日期
-     *
-     * @return CREATED - 提问日期
-     */
-    public Date getCreated() {
-        return created;
-    }
 
-    /**
-     * 设置提问日期
-     *
-     * @param created 提问日期
-     */
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    /**
-     * 获取修改日期
-     *
-     * @return LASTMOD - 修改日期
-     */
-    public Date getLastmod() {
-        return lastmod;
-    }
-
-    /**
-     * 设置修改日期
-     *
-     * @param lastmod 修改日期
-     */
-    public void setLastmod(Date lastmod) {
-        this.lastmod = lastmod;
-    }
-
-    /**
-     * 获取问题录入员
-     *
-     * @return CREATER - 问题录入员
-     */
-    public String getCreater() {
-        return creater;
-    }
-
-    /**
-     * 设置问题录入员
-     *
-     * @param creater 问题录入员
-     */
-    public void setCreater(String creater) {
-        this.creater = creater;
-    }
-
-    /**
-     * 获取修改人
-     *
-     * @return MODIFYER - 修改人
-     */
-    public String getModifyer() {
-        return modifyer;
-    }
-
-    /**
-     * 设置修改人
-     *
-     * @param modifyer 修改人
-     */
-    public void setModifyer(String modifyer) {
-        this.modifyer = modifyer;
-    }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+
     <title>菜单管理</title>
     <#include '../include.ftl'>
     <script type="text/javascript">

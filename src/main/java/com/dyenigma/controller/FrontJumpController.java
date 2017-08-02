@@ -4,13 +4,8 @@ import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Description: 前台页面跳转控制
@@ -19,25 +14,10 @@ import java.util.Map;
  */
 @Controller
 @Api(description = "客户前端页面展示API")
-@RequestMapping(value = "/frontJump")
+@RequestMapping(value = "/front")
 public class FrontJumpController  {
 
     private final Logger logger = LoggerFactory.getLogger(FrontJumpController.class);
-
-    @GetMapping(value = "/show")
-    public String show(Model model) {
-        Map<String, Object> objectHashMap = new HashMap<>();
-        objectHashMap.put("time", new Date());
-        objectHashMap.put("message", "这是测试的内容。。。");
-        objectHashMap.put("toUserName", "张三");
-        objectHashMap.put("fromUserName", "老许");
-
-        model.addAttribute("userList", objectHashMap);
-
-        return "hello";
-
-
-    }
 
     @GetMapping(value = "/base")
     public String base() {

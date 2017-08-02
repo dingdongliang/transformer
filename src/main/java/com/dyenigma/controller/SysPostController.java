@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -89,40 +88,34 @@ public class SysPostController  {
     /**
      * param    request
      * param return 参数
-     * return ModelAndView 返回类型
+     * return
      * throws
      * Title: organEditDlg
      * Description: 跳转到编辑组织页面
      */
     @RequestMapping(value = "/postEdit", method = RequestMethod.GET)
-    public ModelAndView postEdit() {
+    public String postEdit() {
 
         logger.debug("postEdit() is executed!");
 
-        ModelAndView model = new ModelAndView();
-        model.setViewName("manage/post/postEdit");
-
-        return model;
+        return "manage/post/postEdit";
     }
 
 
     /**
      * param    request
      * param return 参数
-     * return ModelAndView 返回类型
+     * return
      * throws
      * Title: organEditDlg
      * Description: 跳转到编辑组织页面
      */
     @RequestMapping(value = "/toSetRole", method = RequestMethod.GET)
-    public ModelAndView toSetRole() {
+    public String toSetRole() {
 
         logger.debug("toSetRole() is executed!");
 
-        ModelAndView model = new ModelAndView();
-        model.setViewName("manage/post/postRole");
-
-        return model;
+        return "manage/post/postRole";
     }
 
     /**

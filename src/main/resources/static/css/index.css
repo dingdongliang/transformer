@@ -55,13 +55,13 @@
 	width: 710px;
 	height: 68px;
 	margin-left: 10px;
-	background: url("../images/r_line.jpg") bottom left repeat-x;
+	background: url(../images/r_line.jpg) bottom left repeat-x;
 }
 
 .s_tuijian h2 {
 	width: 650px;
 	height: 37px;
-	background: url("../images/tj.png") no-repeat;
+	background: url(../images/tj.png) no-repeat;
 	padding: 20px 0px 5px 60px;
 	color: #D3A809;
 	font-size: 18px;
@@ -147,7 +147,7 @@
 .wz dl dd .dd_text_2 .author {
 	display: block; width : 90px;
 	height: 30px;
-	background: url("../images/tx.jpg") 5px 7px no-repeat;
+	background: url(../images/tx.jpg) 5px 7px no-repeat;
 	padding-left: 20px;
 	margin-left: 20px;
 	width: 90px;
@@ -157,7 +157,7 @@
 	display: block;
 	width: 100px;
 	height: 30px;
-	background: url("../images/sj.jpg") 5px 7px no-repeat;
+	background: url(../images/sj.jpg) 5px 7px no-repeat;
 	padding-left: 25px;
 }
 
@@ -274,7 +274,7 @@
 	width: 260px;
 	height: 145px;
 	zoom: 1;
-	background: url("../images/list.png") 5px 5px no-repeat;
+	background: url(../images/list.png) 5px 5px no-repeat;
 	overflow: hidden;
 }
 

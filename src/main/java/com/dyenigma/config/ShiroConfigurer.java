@@ -51,6 +51,7 @@ public class ShiroConfigurer {
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/enter", "anon");
+        filterChainDefinitionMap.put("/front/**", "anon");
         filterChainDefinitionMap.put("/logout", "logout");// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionMap.put("/**", "authc"); // 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边
 

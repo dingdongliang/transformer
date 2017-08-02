@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -43,7 +42,7 @@ public class CaptchaController {
     private Producer captchaProducer = null;
 
     @GetMapping("/captcha")
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
+    public void handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
         response.setDateHeader("Expires", 0);
@@ -77,6 +76,5 @@ public class CaptchaController {
         } finally {
             out.close();
         }
-        return null;
     }
 }

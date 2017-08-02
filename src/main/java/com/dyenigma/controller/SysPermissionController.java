@@ -121,7 +121,7 @@ public class SysPermissionController {
     /**
      * param    request
      * param return 参数
-     * return ModelAndView 返回类型
+     * return
      * throws
      * Title: functionEditDlg
      * Description: 跳转到编辑菜单页面

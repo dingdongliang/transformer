@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.List;
 @Controller
 @Api(description = "组织管理API")
 @RequestMapping(value = "/manage/organ")
-public class SysDivisionController  {
+public class SysDivisionController {
 
     private final Logger logger = LoggerFactory.getLogger(SysDivisionController.class);
 
@@ -58,22 +58,19 @@ public class SysDivisionController  {
     /**
      * param    request
      * param return 参数
-     * return ModelAndView 返回类型
+     * return
      * throws
      * Title: organEditDlg
      * Description: 跳转到编辑组织页面
      */
     @RequestMapping(value = "/organEditDlg/{coId}", method = RequestMethod.GET)
-    public ModelAndView organEditDlg(@PathVariable("coId") String companyId, HttpServletRequest request) {
+    public String organEditDlg(@PathVariable("coId") String companyId, Model model) {
 
         logger.debug("organEditDlg() is executed!");
 
-        request.setAttribute("coId", companyId);
+        model.addAttribute("coId", companyId);
 
-        ModelAndView model = new ModelAndView();
-        model.setViewName("manage/division/divEdit");
-
-        return model;
+        return "manage/division/divEdit";
     }
 
     /**

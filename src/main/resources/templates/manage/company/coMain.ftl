@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="<%=basePath%>"/>
     <title>公司管理</title>
     <#include '../include.ftl'>
     <script type="text/javascript">

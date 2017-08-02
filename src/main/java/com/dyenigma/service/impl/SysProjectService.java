@@ -12,6 +12,8 @@ import com.dyenigma.service.ISysProjectService;
 import com.dyenigma.util.Constants;
 import com.dyenigma.util.StringUtil;
 import com.dyenigma.util.UUIDUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +32,8 @@ import java.util.Map;
 @Transactional
 public class SysProjectService extends BaseService<SysProject> implements
         ISysProjectService {
+
+    private static final Logger logger = LoggerFactory.getLogger(SysProjectService.class);
 
     @Autowired
     private SysProjectMapper sysProjectMapper;
@@ -165,7 +169,8 @@ public class SysProjectService extends BaseService<SysProject> implements
     private void updPrjRole(String userId, SysPrjRole prjRole, String status) {
         BaseDomain.editLog(prjRole, userId);
         prjRole.setStatus(status);
-        sysPrjRoleMapper.updateByPrimaryKeySelective(prjRole);
+        int i = sysPrjRoleMapper.updateByPrimaryKeySelective(prjRole);
+        logger.info("返回值为%d", i);
     }
 
     /**
