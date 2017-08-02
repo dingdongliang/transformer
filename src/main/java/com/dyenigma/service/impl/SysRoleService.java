@@ -63,7 +63,7 @@ public class SysRoleService extends BaseService<SysRole> implements
     @Override
     public Integer getCount(Map<String, Object> paramMap) {
         logger.info("开始查找用户信息的总条数");
-        return mapper.selectCountByCondition(paramMap);
+        return sysRoleMapper.selectCountByCondition(paramMap);
     }
 
     /**
@@ -79,7 +79,7 @@ public class SysRoleService extends BaseService<SysRole> implements
             BaseDomain.createLog(role, userId);
             role.setStatus(Constants.PERSISTENCE_STATUS);
             role.setRoleId(UUIDUtil.getUUID());
-            mapper.insert(role);
+            sysRoleMapper.insert(role);
 
             // 这里设置新增用户的默认权限,首先获取所有的默认且有效的权限
             List<SysPermission> pList = sysPermissionMapper.findAllDefault();
@@ -96,7 +96,7 @@ public class SysRoleService extends BaseService<SysRole> implements
             }
         } else {
             BaseDomain.editLog(role, userId);
-            mapper.updateByPrimaryKeySelective(role);
+            sysRoleMapper.updateByPrimaryKeySelective(role);
         }
         return true;
     }
@@ -107,31 +107,31 @@ public class SysRoleService extends BaseService<SysRole> implements
         //删除角色权限关联
         List<SysRolePmsn> rpList = sysRolePmsnMapper.findAllByRoleId(id);
         for (SysRolePmsn rolePmsn : rpList) {
-            mapper.deleteByPrimaryKey(rolePmsn.getRpId());
+            sysRoleMapper.deleteByPrimaryKey(rolePmsn.getRpId());
         }
 
         //删除角色岗位关联
         List<SysPostRole> prList = sysPostRoleMapper.findAllByRoleId(id);
         for (SysPostRole postRole : prList) {
-            mapper.deleteByPrimaryKey(postRole.getPrId());
+            sysRoleMapper.deleteByPrimaryKey(postRole.getPrId());
         }
 
         //删除角色用户关联
         List<SysUserRole> urList = sysUserRoleMapper.findAllByRoleId(id);
         for (SysUserRole userRole : urList) {
-            mapper.deleteByPrimaryKey(userRole.getUrId());
+            sysRoleMapper.deleteByPrimaryKey(userRole.getUrId());
         }
 
         //删除项目角色关联
         List<SysPrjRole> prjRoles = sysPrjRoleMapper.findAllByRoleId(id);
         for (SysPrjRole prjRole : prjRoles) {
-            mapper.deleteByPrimaryKey(prjRole.getPrId());
+            sysRoleMapper.deleteByPrimaryKey(prjRole.getPrId());
         }
 
         //删除角色
-        SysRole role = mapper.selectByPrimaryKey(id);
+        SysRole role = sysRoleMapper.selectByPrimaryKey(id);
         role.setStatus(Constants.PERSISTENCE_DELETE_STATUS);
-        return mapper.updateByPrimaryKey(role) > 0;
+        return sysRoleMapper.updateByPrimaryKey(role) > 0;
     }
 
 }

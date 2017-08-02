@@ -71,11 +71,11 @@ public class SysProjectService extends BaseService<SysProject> implements
             BaseDomain.createLog(prj, userId);
             prj.setStatus(Constants.PERSISTENCE_STATUS);
             prj.setPrjId(UUIDUtil.getUUID());
-            mapper.insert(prj);
+            sysProjectMapper.insert(prj);
         } else {
 
             BaseDomain.editLog(prj, userId);
-            mapper.updateByPrimaryKeySelective(prj);
+            sysProjectMapper.updateByPrimaryKeySelective(prj);
         }
         return true;
     }
@@ -97,12 +97,12 @@ public class SysProjectService extends BaseService<SysProject> implements
         } else {
             List<SysPrjRole> prjRoleList = sysPrjRoleMapper.findAllByPrjId(prjId);
             for (SysPrjRole prjRole : prjRoleList) {
-                mapper.deleteByPrimaryKey(prjRole.getPrId());
+                sysProjectMapper.deleteByPrimaryKey(prjRole.getPrId());
             }
 
             SysProject prj = sysProjectMapper.selectByPrimaryKey(prjId);
             prj.setStatus(Constants.PERSISTENCE_DELETE_STATUS);
-            return mapper.updateByPrimaryKey(prj) > 0;
+            return sysProjectMapper.updateByPrimaryKey(prj) > 0;
         }
     }
 
@@ -243,7 +243,7 @@ public class SysProjectService extends BaseService<SysProject> implements
         }
         //当所有值都处理完毕以后，剩下的map值就是：原来有对应关系，修改后没有对应关系，删除之
         for (Map.Entry<String, SysPrjUser> entry : map.entrySet()) {
-            mapper.deleteByPrimaryKey(entry.getValue().getPuId());
+            sysPrjUserMapper.deleteByPrimaryKey(entry.getValue().getPuId());
         }
 
         return true;

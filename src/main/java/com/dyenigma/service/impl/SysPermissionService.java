@@ -120,7 +120,7 @@ public class SysPermissionService extends BaseService<SysPermission> implements
             sysRolePmsnMapper.delByPmsnId(id);//删除角色权限映射
             SysPermission pmsn = mapper.selectByPrimaryKey(id);
             pmsn.setStatus(Constants.PERSISTENCE_DELETE_STATUS);
-            return mapper.updateByPrimaryKey(pmsn) > 0;
+            return sysPermissionMapper.updateByPrimaryKey(pmsn) > 0;
         }
     }
 
@@ -168,7 +168,7 @@ public class SysPermissionService extends BaseService<SysPermission> implements
                 permission.setPrntId("0");
             }
             permission.setPmsnId(UUIDUtil.getUUID());
-            mapper.insert(permission);
+            sysPermissionMapper.insert(permission);
         } else {
             //这里还要考虑如果修改菜单名称，同步修改其子菜单对应的prntName名称，关系不大
             if (Constants.PMSN_M.equals(permission.getPmsnType())) {
@@ -177,7 +177,7 @@ public class SysPermissionService extends BaseService<SysPermission> implements
                 permission.setState(Constants.TREE_STATUS_OPEN);
             }
             BaseDomain.editLog(permission, userId);
-            mapper.updateByPrimaryKeySelective(permission);
+            sysPermissionMapper.updateByPrimaryKeySelective(permission);
         }
         return true;
     }

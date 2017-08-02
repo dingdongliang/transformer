@@ -96,7 +96,7 @@ public class SysRolePmsnService extends BaseService<SysRolePmsn> implements
                     rolePmsn.setPmsnId(id);
                     rolePmsn.setRoleId(roleId);
                     rolePmsn.setRpId(UUIDUtil.getUUID());
-                    mapper.insert(rolePmsn);
+                    sysRolePmsnMapper.insert(rolePmsn);
                 }
                 //同时删除已经处理过的map值
                 map.remove(id);
@@ -104,7 +104,7 @@ public class SysRolePmsnService extends BaseService<SysRolePmsn> implements
         }
         //当所有值都处理完毕以后，剩下的map值就是：原来有对应关系，修改后没有对应关系，删除之
         for (Map.Entry<String, SysRolePmsn> entry : map.entrySet()) {
-            mapper.deleteByPrimaryKey(entry.getValue().getRpId());
+            sysRolePmsnMapper.deleteByPrimaryKey(entry.getValue().getRpId());
         }
 
         return true;
@@ -113,7 +113,7 @@ public class SysRolePmsnService extends BaseService<SysRolePmsn> implements
     private void updRolePermission(String userId, SysRolePmsn rolePermission, String status) {
         BaseDomain.editLog(rolePermission, userId);
         rolePermission.setStatus(status);
-        mapper.updateByPrimaryKeySelective(rolePermission);
+        sysRolePmsnMapper.updateByPrimaryKeySelective(rolePermission);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class SysRolePmsnService extends BaseService<SysRolePmsn> implements
             rolePmsn.setRoleId(roleId);
             rolePmsn.setPmsnId(pmsn.getPmsnId());
             rolePmsn.setStatus(Constants.PERSISTENCE_STATUS);
-            mapper.insert(rolePmsn);
+            sysRolePmsnMapper.insert(rolePmsn);
         }
 
         return true;

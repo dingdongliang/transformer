@@ -72,10 +72,10 @@ public class SysPostService extends BaseService<SysPost> implements
             BaseDomain.createLog(post, userId);
             post.setStatus(Constants.PERSISTENCE_STATUS);
             post.setPostId(UUIDUtil.getUUID());
-            mapper.insert(post);
+            sysPostMapper.insert(post);
         } else {
             BaseDomain.editLog(post, userId);
-            mapper.updateByPrimaryKeySelective(post);
+            sysPostMapper.updateByPrimaryKeySelective(post);
         }
         return true;
     }
@@ -162,11 +162,11 @@ public class SysPostService extends BaseService<SysPost> implements
             //没有用户的岗位可以删除，首先删除岗位角色的对应关系，然后删除岗位
             List<SysPostRole> prList = sysPostRoleMapper.findAllByPostId(postId);
             for (SysPostRole postRole : prList) {
-                mapper.deleteByPrimaryKey(postRole.getPrId());
+                sysPostMapper.deleteByPrimaryKey(postRole.getPrId());
             }
-            SysPost post = mapper.selectByPrimaryKey(postId);
+            SysPost post = sysPostMapper.selectByPrimaryKey(postId);
             post.setStatus(Constants.PERSISTENCE_DELETE_STATUS);
-            return mapper.updateByPrimaryKey(post) > 0;
+            return sysPostMapper.updateByPrimaryKey(post) > 0;
         }
     }
 

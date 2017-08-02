@@ -39,9 +39,9 @@ public class SysCompanyService extends BaseService<SysCompany> implements
     @Autowired
     private SysCompanyMapper sysCompanyMapper;
     @Autowired
-    private SysDivisionMapper divisionMapper;
+    private SysDivisionMapper sysDivisionMapper;
     @Autowired
-    private SysProjectMapper projectMapper;
+    private SysProjectMapper sysProjectMapper;
 
     /**
      * Description: 获取所有的公司名称和ID
@@ -53,7 +53,7 @@ public class SysCompanyService extends BaseService<SysCompany> implements
      */
     @Override
     public List<TreeModel> getAllCoName() {
-        List<SysCompany> coList = mapper.selectAll();
+        List<SysCompany> coList = sysCompanyMapper.selectAll();
         return permToTree("0", coList);
     }
 
@@ -85,21 +85,21 @@ public class SysCompanyService extends BaseService<SysCompany> implements
     @Override
     public Integer getCount(Map<String, Object> paramMap) {
         logger.info("开始查找公司信息的总条数");
-        return mapper.selectCountByCondition(paramMap);
+        return sysCompanyMapper.selectCountByCondition(paramMap);
     }
 
     @Override
     public boolean delComp(String compId) {
-        List<SysDivision> divList = divisionMapper.findByCompId(compId);
+        List<SysDivision> divList = sysDivisionMapper.findByCompId(compId);
         List<SysCompany> coList = sysCompanyMapper.findByPid(compId);
-        List<SysProject> pList = projectMapper.getPrjByCoId(compId);
+        List<SysProject> pList = sysProjectMapper.getPrjByCoId(compId);
         //如果公司下面有组织信息或子公司，则不能删除
         if (divList.size() > 0 && coList.size() > 0 && pList.size() > 0) {
             return false;
         } else {
-            SysCompany co = mapper.selectByPrimaryKey(compId);
+            SysCompany co = sysCompanyMapper.selectByPrimaryKey(compId);
             co.setStatus(Constants.PERSISTENCE_DELETE_STATUS);
-            return mapper.updateByPrimaryKey(co) > 0;
+            return sysCompanyMapper.updateByPrimaryKey(co) > 0;
         }
     }
 
@@ -116,10 +116,10 @@ public class SysCompanyService extends BaseService<SysCompany> implements
             if (StringUtil.isEmpty(company.getPrntId())) {
                 company.setPrntId("0");
             }
-            mapper.insert(company);
+            sysCompanyMapper.insert(company);
         } else {
             BaseDomain.editLog(company, userId);
-            mapper.updateByPrimaryKeySelective(company);
+            sysCompanyMapper.updateByPrimaryKeySelective(company);
         }
         return true;
     }
@@ -136,9 +136,9 @@ public class SysCompanyService extends BaseService<SysCompany> implements
     public List<SysCompany> AllCoById(String coId) {
         List<SysCompany> returnList = new ArrayList<>();
 
-        returnList.add(mapper.selectByPrimaryKey(coId));
+        returnList.add(sysCompanyMapper.selectByPrimaryKey(coId));
         List<SysCompany> coList = new ArrayList<>();
-        coList.add(mapper.selectByPrimaryKey(coId));
+        coList.add(sysCompanyMapper.selectByPrimaryKey(coId));
         returnList.addAll(findByPrntId(coId, coList).stream().collect(Collectors.toList()));
 
         return returnList;

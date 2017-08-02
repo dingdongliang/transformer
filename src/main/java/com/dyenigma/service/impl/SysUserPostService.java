@@ -93,7 +93,7 @@ public class SysUserPostService extends BaseService<SysUserPost> implements
                     //传递过来的Id
                     userPost.setUserId(userId);
                     userPost.setUpId(UUIDUtil.getUUID());
-                    mapper.insert(userPost);
+                    sysUserPostMapper.insert(userPost);
                 }
                 //同时删除已经处理过的map值
                 map.remove(id);
@@ -101,7 +101,7 @@ public class SysUserPostService extends BaseService<SysUserPost> implements
         }
         //当所有值都处理完毕以后，剩下的map值就是：原来有对应关系，修改后没有对应关系，删除之
         for (Map.Entry<String, SysUserPost> entry : map.entrySet()) {
-            mapper.deleteByPrimaryKey(entry.getValue().getUpId());
+            sysUserPostMapper.deleteByPrimaryKey(entry.getValue().getUpId());
         }
 
         return true;
@@ -110,7 +110,7 @@ public class SysUserPostService extends BaseService<SysUserPost> implements
     private void updUserPost(String userId, SysUserPost userPost, String status) {
         BaseDomain.editLog(userPost, userId);
         userPost.setStatus(status);
-        mapper.updateByPrimaryKeySelective(userPost);
+        sysUserPostMapper.updateByPrimaryKeySelective(userPost);
     }
 
     /**

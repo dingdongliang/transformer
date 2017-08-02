@@ -45,30 +45,30 @@ public class SysUserService extends BaseService<SysUser> implements
     private final Logger logger = LoggerFactory.getLogger(SysUserService.class);
 
     @Autowired
-    private SysUserMapper userMapper;
+    private SysUserMapper sysUserMapper;
     @Autowired
-    private SysRoleMapper roleMapper;
+    private SysRoleMapper sysRoleMapper;
     @Autowired
-    private SysUserRoleMapper userRoleMapper;
+    private SysUserRoleMapper sysUserRoleMapper;
     @Autowired
-    private SysUserPmsnMapper userPmsnMapper;
+    private SysUserPmsnMapper sysUserPmsnMapper;
     @Autowired
-    private SysUserPostMapper userPostMapper;
+    private SysUserPostMapper sysUserPostMapper;
     @Autowired
-    private SysPrjUserMapper prjUserMapper;
+    private SysPrjUserMapper sysPrjUserMapper;
     @Autowired
-    private SysPostMapper postMapper;
+    private SysPostMapper sysPostMapper;
 
     @Override
     public List<SysUser> findAll() {
         logger.debug("run the users findall");
-        return mapper.selectAll();
+        return sysUserMapper.selectAll();
     }
 
     @Override
     public SysUser getUserByName(String name) {
 
-        return userMapper.findByName(name);
+        return sysUserMapper.findByName(name);
     }
 
     @Override
@@ -80,9 +80,9 @@ public class SysUserService extends BaseService<SysUser> implements
             sysUser.setPassword(Md5Utils.hash(Constants.DEFAULT_PASSWORD));
             sysUser.setStatus(Constants.PERSISTENCE_STATUS);
             sysUser.setUserId(UUIDUtil.getUUID());
-            mapper.insert(sysUser);
+            sysUserMapper.insert(sysUser);
 
-            List<SysRole> rList = roleMapper.findDefaultRole();
+            List<SysRole> rList = sysRoleMapper.findDefaultRole();
             for (SysRole role : rList) {
                 SysUserRole userRole = new SysUserRole();
                 BaseDomain.createLog(userRole, userId);
@@ -90,12 +90,12 @@ public class SysUserService extends BaseService<SysUser> implements
                 userRole.setUserId(sysUser.getUserId());
                 userRole.setRoleId(role.getRoleId());
                 userRole.setStatus(Constants.PERSISTENCE_STATUS);
-                userRoleMapper.insert(userRole);
+                sysUserRoleMapper.insert(userRole);
             }
 
         } else {
             BaseDomain.editLog(sysUser, userId);
-            mapper.updateByPrimaryKeySelective(sysUser);
+            sysUserMapper.updateByPrimaryKeySelective(sysUser);
         }
         return true;
     }
@@ -109,38 +109,38 @@ public class SysUserService extends BaseService<SysUser> implements
     @Override
     public List<SysUser> allUserByPage(PageUtil pageUtil) {
         logger.info("开始查找用户信息,分页显示");
-        return userMapper.findAllByPage(pageUtil);
+        return sysUserMapper.findAllByPage(pageUtil);
     }
 
     @Override
     public boolean delUser(String userId) {
         //删除用户角色映射
-        List<SysUserRole> urList = userRoleMapper.findAllByUserId(userId);
+        List<SysUserRole> urList = sysUserRoleMapper.findAllByUserId(userId);
         for (SysUserRole userRole : urList) {
-            mapper.deleteByPrimaryKey(userRole.getUrId());
+            sysUserMapper.deleteByPrimaryKey(userRole.getUrId());
         }
 
         //删除用户权限映射
-        List<SysUserPmsn> upList = userPmsnMapper.findAllByUserId(userId);
+        List<SysUserPmsn> upList = sysUserPmsnMapper.findAllByUserId(userId);
         for (SysUserPmsn userPmsn : upList) {
-            mapper.deleteByPrimaryKey(userPmsn.getUpmId());
+            sysUserMapper.deleteByPrimaryKey(userPmsn.getUpmId());
         }
 
         //删除用户岗位映射
-        List<SysUserPost> userPostList = userPostMapper.findAllByUserId(userId);
+        List<SysUserPost> userPostList = sysUserPostMapper.findAllByUserId(userId);
         for (SysUserPost userPost : userPostList) {
-            mapper.deleteByPrimaryKey(userPost.getUpId());
+            sysUserMapper.deleteByPrimaryKey(userPost.getUpId());
         }
         //删除项目组用户映射
-        List<SysPrjUser> prjUserList = prjUserMapper.findAllByUserId(userId);
+        List<SysPrjUser> prjUserList = sysPrjUserMapper.findAllByUserId(userId);
         for (SysPrjUser prjUser : prjUserList) {
-            mapper.deleteByPrimaryKey(prjUser.getPuId());
+            sysUserMapper.deleteByPrimaryKey(prjUser.getPuId());
         }
         //删除用户
 
-        SysUser user = mapper.selectByPrimaryKey(userId);
+        SysUser user = sysUserMapper.selectByPrimaryKey(userId);
         user.setStatus(Constants.PERSISTENCE_DELETE_STATUS);
-        return mapper.updateByPrimaryKey(user) > 0;
+        return sysUserMapper.updateByPrimaryKey(user) > 0;
 
     }
 
@@ -187,7 +187,7 @@ public class SysUserService extends BaseService<SysUser> implements
             //获取每个节点的id，即部门id
             String divId = treeModel.getId();
             //获取该部门下属的所有岗位
-            List<SysPost> postList = postMapper.findPostByDiv(divId);
+            List<SysPost> postList = sysPostMapper.findPostByDiv(divId);
             //把岗位加入部门节点内
             treeModel.setChildren(addPostToDiv(postList, children));
         }
@@ -220,6 +220,6 @@ public class SysUserService extends BaseService<SysUser> implements
      */
     @Override
     public List<SysUser> findUserByPage(PageUtil pageUtil, Set<String> idList) {
-        return userMapper.findUserByPage(pageUtil, idList);
+        return sysUserMapper.findUserByPage(pageUtil, idList);
     }
 }

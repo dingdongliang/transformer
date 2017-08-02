@@ -73,7 +73,7 @@ public class SysPostRoleService extends BaseService<SysPostRole> implements
                     sysPostRole.setRoleId(id);
                     sysPostRole.setPostId(postId);
                     sysPostRole.setPrId(UUIDUtil.getUUID());
-                    mapper.insert(sysPostRole);
+                    sysPostRoleMapper.insert(sysPostRole);
                 }
                 //同时删除已经处理过的map值
                 map.remove(id);
@@ -81,7 +81,7 @@ public class SysPostRoleService extends BaseService<SysPostRole> implements
         }
         //当所有值都处理完毕以后，剩下的map值就是：原来有对应关系，修改后没有对应关系，删除之
         for (Map.Entry<String, SysPostRole> entry : map.entrySet()) {
-            mapper.deleteByPrimaryKey(entry.getValue().getPrId());
+            sysPostRoleMapper.deleteByPrimaryKey(entry.getValue().getPrId());
         }
 
         return true;
@@ -90,7 +90,7 @@ public class SysPostRoleService extends BaseService<SysPostRole> implements
     private void updPostRole(String userId, SysPostRole postRole, String status) {
         BaseDomain.editLog(postRole, userId);
         postRole.setStatus(status);
-        mapper.updateByPrimaryKeySelective(postRole);
+        sysPostRoleMapper.updateByPrimaryKeySelective(postRole);
     }
 
 

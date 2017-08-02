@@ -74,7 +74,7 @@ public class SysUserPmsnService extends BaseService<SysUserPmsn> implements
                     //传递过来的Id
                     userPmsn.setUserId(userId);
                     userPmsn.setUpmId(UUIDUtil.getUUID());
-                    mapper.insert(userPmsn);
+                    sysUserPmsnMapper.insert(userPmsn);
                 }
                 //同时删除已经处理过的map值
                 map.remove(id);
@@ -82,7 +82,7 @@ public class SysUserPmsnService extends BaseService<SysUserPmsn> implements
         }
         //当所有值都处理完毕以后，剩下的map值就是：原来有对应关系，修改后没有对应关系，删除之
         for (Map.Entry<String, SysUserPmsn> entry : map.entrySet()) {
-            mapper.deleteByPrimaryKey(entry.getValue().getUpmId());
+            sysUserPmsnMapper.deleteByPrimaryKey(entry.getValue().getUpmId());
         }
 
         return true;
@@ -91,7 +91,7 @@ public class SysUserPmsnService extends BaseService<SysUserPmsn> implements
     private void updUserPmsn(String userId, SysUserPmsn userPmsn, String status) {
         BaseDomain.editLog(userPmsn, userId);
         userPmsn.setStatus(status);
-        mapper.updateByPrimaryKeySelective(userPmsn);
+        sysUserPmsnMapper.updateByPrimaryKeySelective(userPmsn);
     }
 
     /**

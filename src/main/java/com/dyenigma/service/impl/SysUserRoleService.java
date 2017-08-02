@@ -106,7 +106,7 @@ public class SysUserRoleService extends BaseService<SysUserRole> implements
                     //传递过来的Id
                     userRole.setUserId(userId);
                     userRole.setUrId(UUIDUtil.getUUID());
-                    mapper.insert(userRole);
+                    sysUserRoleMapper.insert(userRole);
                 }
                 //同时删除已经处理过的map值
                 map.remove(id);
@@ -114,7 +114,7 @@ public class SysUserRoleService extends BaseService<SysUserRole> implements
         }
         //当所有值都处理完毕以后，剩下的map值就是：原来有对应关系，修改后没有对应关系，删除之
         for (Map.Entry<String, SysUserRole> entry : map.entrySet()) {
-            mapper.deleteByPrimaryKey(entry.getValue().getUrId());
+            sysUserRoleMapper.deleteByPrimaryKey(entry.getValue().getUrId());
         }
 
         return true;
@@ -123,7 +123,7 @@ public class SysUserRoleService extends BaseService<SysUserRole> implements
     private void updUserRole(String userId, SysUserRole userRole, String status) {
         BaseDomain.editLog(userRole, userId);
         userRole.setStatus(status);
-        mapper.updateByPrimaryKeySelective(userRole);
+        sysUserRoleMapper.updateByPrimaryKeySelective(userRole);
     }
 
     /**

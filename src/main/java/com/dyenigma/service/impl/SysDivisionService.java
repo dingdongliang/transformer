@@ -40,9 +40,9 @@ public class SysDivisionService extends BaseService<SysDivision> implements
         if (pList.size() > 0) {
             return false;
         } else {
-            SysDivision divi = mapper.selectByPrimaryKey(id);
+            SysDivision divi = sysDivisionMapper.selectByPrimaryKey(id);
             divi.setStatus(Constants.PERSISTENCE_DELETE_STATUS);
-            return mapper.updateByPrimaryKey(divi) > 0;
+            return sysDivisionMapper.updateByPrimaryKey(divi) > 0;
         }
     }
 
@@ -75,12 +75,12 @@ public class SysDivisionService extends BaseService<SysDivision> implements
             divi.setState(Constants.TREE_STATUS_OPEN);
             divi.setDivId(UUIDUtil.getUUID());
             divi.setIconCls(Constants.DIVISION_ICON);
-            mapper.insert(divi);
+            sysDivisionMapper.insert(divi);
         } else {
             divi.setState(Constants.TREE_STATUS_OPEN);
             BaseDomain.editLog(divi, userId);
             divi.setIconCls(Constants.DIVISION_ICON);
-            mapper.updateByPrimaryKeySelective(divi);
+            sysDivisionMapper.updateByPrimaryKeySelective(divi);
         }
         return true;
     }
