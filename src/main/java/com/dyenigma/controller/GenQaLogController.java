@@ -30,8 +30,6 @@ import java.util.List;
 @Api(description = "问答日志API")
 @RequestMapping("/gen/qa/log")
 public class GenQaLogController {
-    Rest
-
 
     private final Logger logger = LoggerFactory.getLogger(GenQaLogController.class);
     @Resource

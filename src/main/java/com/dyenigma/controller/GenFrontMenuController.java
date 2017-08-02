@@ -27,7 +27,7 @@ import java.util.List;
  * date 207/21
  */
 @RestController
-@ApiIgnoreRest
+@ApiIgnore
 @RequestMapping("/gen/front/menu")
 public class GenFrontMenuController {
 

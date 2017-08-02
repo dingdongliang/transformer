@@ -27,8 +27,7 @@ import java.util.List;
  * date 207/21
  */
 @RestController
-@Api(description = "问答功能API")Rest
-
+@Api(description = "问答功能API")
 @RequestMapping("/gen/answer")
 public class GenAnswerController {
     private final Logger logger = LoggerFactory.getLogger(GenAnswerController.class);
