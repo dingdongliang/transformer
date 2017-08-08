@@ -112,6 +112,7 @@ public class SysUserService extends BaseService<SysUser> implements
         return sysUserMapper.findAllByPage(pageUtil);
     }
 
+    // TODO 改造成存储过程实现
     @Override
     public boolean delUser(String userId) {
         //删除用户角色映射
