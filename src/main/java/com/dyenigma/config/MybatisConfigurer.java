@@ -49,6 +49,10 @@ public class MybatisConfigurer {
         return factory.getObject();
     }
 
+    /**
+     * 使用通用Mapper，必须配置
+     * return
+     */
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();

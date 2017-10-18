@@ -18,11 +18,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description: 测试用类
@@ -83,5 +87,25 @@ public class UserController {
         List<User> list = userService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    @ApiOperation(value = "生成Session测试", notes = "生成Session用来测试redis支持的Session共享")
+    @ApiImplicitParam(name = "request", value = "测试请求对象", required = true, dataType = "HttpServletRequest")
+    @RequestMapping(value = "/first", method = RequestMethod.GET)
+    public Map<String, Object> firstResp (HttpServletRequest request){
+        Map<String, Object> map = new HashMap<>();
+        request.getSession().setAttribute("request Url", request.getRequestURL());
+        map.put("request Url", request.getRequestURL());
+        return map;
+    }
+
+    @ApiOperation(value = "获取Session测试", notes = "返回Session内容")
+    @ApiImplicitParam(name = "request", value = "测试请求对象", required = true, dataType = "HttpServletRequest")
+    @RequestMapping(value = "/sessions", method = RequestMethod.GET)
+    public Object sessions (HttpServletRequest request){
+        Map<String, Object> map = new HashMap<>();
+        map.put("sessionId", request.getSession().getId());
+        map.put("message", request.getSession().getAttribute("request Url"));
+        return map;
     }
 }
