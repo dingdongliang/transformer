@@ -36,7 +36,7 @@
 
     	com.dyenigma.druid.DruidStatFilter.java
     	com.dyenigma.druid.DruidStatViewServlet.java
-    	com.dyenigma.druid.DruidConfigurer.java
+    	com.dyenigma.config.DruidConfigurer.java
 
 - Druid监控Spring相关类
 
